@@ -18,12 +18,14 @@ RUN apt-get update && \
     apt-get autoremove && \
     apt-get clean -y
 
-# Zsh & Oh-My-Zsh
+# Zsh & Oh-My-Zsh & Powerlevel10k
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k && \
     chsh -s /bin/zsh && \
     source ~/.zshrc && \
     omz update
+COPY ./files/root/.p10k.zsh /root/.p10k.zsh
 COPY ./files/root/.zshrc /root/.zshrc
 RUN source ~/.zshrc && \
     git -C $ZSH remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/ohmyzsh.git && \
