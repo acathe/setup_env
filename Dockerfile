@@ -16,7 +16,7 @@ COPY ./files/etc/apt/sources.list /etc/apt/sources.list
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get autoremove && \
-    apt-get clean -y
+    apt-get autoclean -y
 
 # Zsh & Oh-My-Zsh & Powerlevel10k
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
@@ -36,15 +36,16 @@ RUN source ~/.zshrc && \
 RUN apt-get update && \
     apt-get install build-essential gdb cmake -y && \
     apt-get autoremove -y && \
-    apt-get clean -y
+    apt-get autoclean -y
 
 # Golang
 ARG GO_VERSION
-RUN curl -OL https://go.dev/dl/go${GO_VERSION}.${OS}-${ARCH}.tar.gz && \
+RUN curl --proto '=https' --tlsv1.2 -sSfOL https://golang.google.cn/dl/go${GO_VERSION}.${OS}-${ARCH}.tar.gz && \
     rm -rf /usr/local/go && \
     tar -C /usr/local -xzf go${GO_VERSION}.${OS}-${ARCH}.tar.gz && \
     rm go${GO_VERSION}.${OS}-${ARCH}.tar.gz
 
 # Rust
-RUN curl --proto '=https' --tlsv1.2 -sSf https://rsproxy.cn/rustup-init.sh | sh -s -- -y
+RUN source ~/.zshrc && \
+    curl --proto '=https' --tlsv1.2 -sSf https://rsproxy.cn/rustup-init.sh | sh -s -- -y
 COPY ./files/root/.cargo/config /root/.cargo/config

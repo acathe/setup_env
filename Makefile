@@ -8,7 +8,6 @@ all:
 	--build-arg OS=${OS} \
 	--build-arg ARCH=${ARCH} \
 	--build-arg GO_VERSION=${GO_VERSION} \
-	--squash \
 	-t $(IMAGE) .
 
 test:
@@ -16,6 +15,5 @@ test:
 	--build-arg OS=${OS} \
 	--build-arg ARCH=${ARCH} \
 	--build-arg GO_VERSION=${GO_VERSION} \
-	--squash \
 	--no-cache --progress=plain \
 	-t $(IMAGE) .
