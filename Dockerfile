@@ -53,7 +53,7 @@ COPY ./files/root/.cargo/config /root/.cargo/config
 # Python
 RUN apt-get update &&\
     apt-get install python3-pip -y &&\
-    pip install --upgrade pip &&\
+    python3 -m pip install --upgrade pip &&\
     pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple &&\
     apt-get autoremove -y &&\
     apt-get autoclean -y
