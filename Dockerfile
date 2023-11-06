@@ -15,7 +15,7 @@ COPY ./files/root/.gitconfig /root/.gitconfig
 COPY ./files/etc/apt/sources.list /etc/apt/sources.list
 RUN apt-get update &&\
     apt-get upgrade -y &&\
-    apt-get autoremove &&\
+    apt-get autoremove -y &&\
     apt-get autoclean -y
 
 # Zsh & Oh-My-Zsh & Powerlevel10k
