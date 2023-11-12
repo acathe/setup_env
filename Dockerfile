@@ -2,9 +2,6 @@ FROM docker/dev-environments-default:stable-1
 
 SHELL ["/bin/zsh", "-c"]
 
-ARG OS
-ARG ARCH
-
 # 时区
 RUN ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
@@ -16,7 +13,7 @@ COPY ./files/etc/apt/sources.list /etc/apt/sources.list
 RUN apt-get update &&\
     apt-get upgrade -y &&\
     apt-get autoremove -y &&\
-    apt-get autoclean -y
+    apt-get autoclean
 
 # Zsh & Oh-My-Zsh & Powerlevel10k
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions &&\
@@ -36,14 +33,14 @@ RUN source ~/.zshrc &&\
 RUN apt-get update &&\
     apt-get install build-essential gdb cmake -y &&\
     apt-get autoremove -y &&\
-    apt-get autoclean -y
+    apt-get autoclean
 
 # Golang
 ARG GO_VERSION
-RUN curl --proto '=https' --tlsv1.2 -sSfOL https://golang.google.cn/dl/go${GO_VERSION}.${OS}-${ARCH}.tar.gz &&\
+RUN curl --proto '=https' --tlsv1.2 -sSfOL https://golang.google.cn/dl/go${GO_VERSION}.linux-arm64.tar.gz &&\
     rm -rf /usr/local/go &&\
-    tar -C /usr/local -xzf go${GO_VERSION}.${OS}-${ARCH}.tar.gz &&\
-    rm go${GO_VERSION}.${OS}-${ARCH}.tar.gz
+    tar -C /usr/local -xzf go${GO_VERSION}.linux-arm64.tar.gz &&\
+    rm go${GO_VERSION}.linux-arm64.tar.gz
 
 # Rust
 RUN source ~/.zshrc &&\
@@ -56,4 +53,4 @@ RUN apt-get update &&\
     python3 -m pip install --upgrade pip &&\
     pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple &&\
     apt-get autoremove -y &&\
-    apt-get autoclean -y
+    apt-get autoclean
