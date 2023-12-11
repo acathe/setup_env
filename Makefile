@@ -1,5 +1,5 @@
 IMAGE := acathe/dev-environments-default
-GO_VERSION := 1.21.4
+GO_VERSION := 1.21.5
 
 all:
 	docker build \
