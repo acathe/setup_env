@@ -58,11 +58,11 @@ configure_git() {
     fi
 
     # Configure gitconfig based on environment variables.
-    if [ -n "$DEVENV_GIT_USER_NAME" ]; then
-        git config --global user.name "$DEVENV_GIT_USER_NAME"
+    if [ -n "$SET_GIT_USER_NAME" ]; then
+        git config --global user.name "$SET_GIT_USER_NAME"
     fi
-    if [ -n "$DEVENV_GIT_USER_EMAIL" ]; then
-        git config --global user.email "$DEVENV_GIT_USER_EMAIL"
+    if [ -n "$SET_GIT_USER_EMAIL" ]; then
+        git config --global user.email "$SET_GIT_USER_EMAIL"
     fi
     git config --global core.editor "code --wait"
 }
