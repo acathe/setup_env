@@ -5,28 +5,27 @@
 
 set -e
 
-# Specify the Go version to install to.
-# @parameter
-#   - $1: go_version
 main() {
-    local go_version="$1"
-
-    if [[ -z "$go_version" ]]; then
-        echo "Error: No Go version was specified." >&2
-        return 1
+    if [ -z "$(command -v jq)" ]; then
+        sudo apt-get update
+        sudo apt-get install jq -y
+        sudo apt-get autoremove -y
+        sudo apt-get clean
     fi
 
-    local golang_download="https://go.dev/dl/go${go_version}.linux-amd64.tar.gz"
+    local go_version
+    go_version="$(curl --proto '=https' --tlsv1.2 -sSfL https://go.dev/dl/?mode=json | jq -r '.[0].version')"
+
+    local golang_download="https://go.dev/dl/${go_version}.linux-amd64.tar.gz"
     if [ -n "$ENABLE_CHINA_MIRROR" ]; then
-        golang_download="https://golang.google.cn/dl/go${go_version}.linux-amd64.tar.gz"
+        golang_download="https://golang.google.cn/dl/${go_version}.linux-amd64.tar.gz"
     fi
 
-    curl --proto '=https' --tlsv1.2 -sSfOL "${golang_download}" &&
-        rm -rf /usr/local/go &&
-        tar -C /usr/local -xzf "./go${go_version}.linux-arm64.tar.gz" &&
-        rm "./go${go_version}.linux-arm64.tar.gz"
+    curl --proto '=https' --tlsv1.2 -sSfOL "${golang_download}"
+    rm -rf /usr/local/go
+    tar -C /usr/local -xzf "./${go_version}.linux-amd64.tar.gz"
+    rm "./${go_version}.linux-amd64.tar.gz"
 
-    # Append Go configuration
     cat <<EOF | tee -a ~/.zshrc
 # Golang
 export GO111MODULE="on"
@@ -36,7 +35,6 @@ export PATH="$GOPATH/bin:$PATH"
 EOF
 
     if [ -n "$ENABLE_CHINA_MIRROR" ]; then
-        # Append China proxy
         cat <<EOF | tee -a ~/.zshrc
 export GOPROXY="https://goproxy.cn,direct"
 export GOSUMDB="sum.golang.google.cn"
