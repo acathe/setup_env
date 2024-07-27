@@ -1,62 +1,69 @@
 # Setup Env
 
-## Quick Start
+- [1. Quick Start](#1-quick-start)
+- [2. Installation](#2-installation)
+  - [2.1. APT](#21-apt)
+  - [2.2. Zsh](#22-zsh)
+  - [2.3. Oh-My-Zsh](#23-oh-my-zsh)
+  - [2.4. Oh-My-Zsh Plugins](#24-oh-my-zsh-plugins)
+  - [2.5. Git](#25-git)
 
-Run the script directly to quickly install Zsh, Oh-My-Zsh and its plugins
- on Debian Bookworm.
-
-```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/Acathe/setup_env/orbstack_machines/master/setup_env.sh)"
-```
-
-## Instructions
-
-This is a personalized script! It is recommended to refer to it and implement
- your own!
-
-This script is for Debian Linux machines on Orbstack. It is intended for
- a minimal Debian installation.
-
-It will eventually install Zsh, Oh-My-Zsh with some plugins.
-
-When using this script, it is recommended to bypass the GFW to install
- various software from the official repository.
-
-By running the script with ENABLE_CHINA_MIRROR, You can receive
- subsequent updates from Chinese mirror.
-
-## Install
-
-If you also want to create a global .gitconfig file, you can use the
- SET_GIT related variables.
+## 1. Quick Start
 
 ```bash
-SET_GIT_USER_NAME=${your_name} \
-SET_GIT_USER_EMAIL=${your_email} \
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/Acathe/setup_env/orbstack_machines/master/setup_env.sh)"
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/apt.sh")" &&
+  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/zsh.sh")" &&
+  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/omz.sh")" &&
+  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/omz_plugins.sh")" &&
 ```
-
-If you want to use Chinese mirrors for subsequent installations, you can add
- the ENABLE_CHINA_MIRROR variable.
-
-However, during the initial installation, it will still use the official
- sources.
-
-this setting only takes effect for subsequent updates.
 
 ```bash
-ENABLE_CHINA_MIRROR=1 \
-SET_GIT_USER_NAME=${your_name} \
-SET_GIT_USER_EMAIL=${your_email} \
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/Acathe/setup_env/orbstack_machines/master/setup_env.sh)"
+export ENABLE_CHINA_MIRROR=1 &&
+  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/apt.sh")" &&
+  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/zsh.sh")" &&
+  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/omz.sh")" &&
+  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/omz_plugins.sh")" &&
+  unset ENABLE_CHINA_MIRROR
 ```
 
-## 参数
+## 2. Installation
 
-Respects the following environment variables:
+### 2.1. APT
 
-|||
-|:-:|:-|
-|ENABLE_CHINA_MIRROR|enable Chinese mirror for subsequent updates.|
-|SET_GIT_USER_NAME|set the user.name in global gitconfig.|
-|SET_GIT_USER_EMAIL|set the user.email in global gitconfig.|
+```bash
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/apt.sh")"
+```
+
+| Environment Variables |
+| :-: |
+| `ENABLE_CHINA_MIRROR=1` |
+
+### 2.2. Zsh
+
+```bash
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/zsh.sh")"
+```
+
+### 2.3. Oh-My-Zsh
+
+```bash
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/omz.sh")"
+```
+
+| Environment Variables |
+| :-: |
+| `ENABLE_CHINA_MIRROR=1` |
+
+### 2.4. Oh-My-Zsh Plugins
+
+```bash
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/omz_plugins.sh")"
+```
+
+### 2.5. Git
+
+```bash
+git config --global user.name "${your_name}" &&
+  git config --global user.email "${your_email}" &&
+  git config --global core.editor "code --wait"
+```
