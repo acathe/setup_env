@@ -74,22 +74,22 @@ install_zsh() {
     fi
 
     # Sync Bash configuration to Zsh.
-    echo "source /etc/environment" >~/.tmp.zsh && # sync /etc/zsh/zshenv
-        cat /etc/zsh/zshenv >>~/.tmp.zsh &&
-        sudo mv ~/.tmp.zsh /etc/zsh/zshenv
-    echo "source /etc/profile" >~/.tmp.zsh && # sync /etc/zsh/zprofile
-        cat /etc/zsh/zprofile >>~/.tmp.zsh &&
-        sudo mv ~/.tmp.zsh /etc/zsh/zprofile
-    echo "shopt() {}" >~/.tmp.zsh && # sync /etc/zsh/zshrc
-        echo "source /etc/bash.bashrc" >>~/.tmp.zsh &&
-        echo "unset -f shopt" >>~/.tmp.zsh &&
-        cat /etc/zsh/zshrc >>~/.tmp.zsh &&
-        sudo mv ~/.tmp.zsh /etc/zsh/zshrc
-    echo "source ~/.bash_logout" >~/.zlogout # sync ~/.zlogout
-    echo "source ~/.profile" >~/.zprofile    # sync ~/.zprofile
-    echo "shopt() {}" >~/.zshrc &&           # sync ~/.zshrc
-        echo "source /etc/bash.bashrc" >>~/.zshrc &&
-        echo "unset -f shopt" >>~/.zshrc
+    echo "source /etc/environment" >"$HOME/.tmp.zsh" && # sync /etc/zsh/zshenv
+        cat /etc/zsh/zshenv >>"$HOME/.tmp.zsh" &&
+        sudo mv "$HOME/.tmp.zsh" /etc/zsh/zshenv
+    echo "source /etc/profile" >"$HOME/.tmp.zsh" && # sync /etc/zsh/zprofile
+        cat /etc/zsh/zprofile >>"$HOME/.tmp.zsh" &&
+        sudo mv "$HOME/.tmp.zsh" /etc/zsh/zprofile
+    echo "shopt() {}" >"$HOME/.tmp.zsh" && # sync /etc/zsh/zshrc
+        echo "source /etc/bash.bashrc" >>"$HOME/.tmp.zsh" &&
+        echo "unset -f shopt" >>"$HOME/.tmp.zsh" &&
+        cat /etc/zsh/zshrc >>"$HOME/.tmp.zsh" &&
+        sudo mv "$HOME/.tmp.zsh" /etc/zsh/zshrc
+    echo "source $HOME/.bash_logout" >"$HOME/.zlogout" # sync ~/.zlogout
+    echo "source $HOME/.profile" >"$HOME/.zprofile"    # sync ~/.zprofile
+    echo "shopt() {}" >"$HOME/.zshrc" &&               # sync ~/.zshrc
+        echo "source /etc/bash.bashrc" >>"$HOME/.zshrc" &&
+        echo "unset -f shopt" >>"$HOME/.zshrc"
 }
 
 install_ohmyzsh() {
@@ -107,32 +107,32 @@ install_ohmyzsh() {
     fi
 
     # Sync the previous ~/.zshrc with Oh-My-Zsh.
-    cat ~/.zshrc.pre-oh-my-zsh >~/.tmp.zsh &&
-        cat ~/.zshrc >>~/.tmp.zsh &&
-        mv ~/.tmp.zsh ~/.zshrc
+    cat "$HOME/.zshrc.pre-oh-my-zsh" >"$HOME/.tmp.zsh" &&
+        cat "$HOME/.zshrc" >>"$HOME/.tmp.zsh" &&
+        mv "$HOME/.tmp.zsh" "$HOME/.zshrc"
 
     # Remove backup files
-    rm ~/.shell.pre-oh-my-zsh ~/.zshrc.pre-oh-my-zsh
+    rm "$HOME/.shell.pre-oh-my-zsh" "$HOME/.zshrc.pre-oh-my-zsh"
 }
 
 configure_ohmyzsh() {
     # Append plugins.
-    sed -i '/^plugins=(/ s/)/ gitignore z vscode)/' ~/.zshrc
+    sed -i '/^plugins=(/ s/)/ gitignore z vscode)/' "$HOME/.zshrc"
 
     # It suggests commands as you type based on history and completions.
     # Ref. https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md#oh-my-zsh
-    git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
-    sed -i '/^plugins=(/ s/)/ zsh-autosuggestions)/' ~/.zshrc
+    git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+    sed -i '/^plugins=(/ s/)/ zsh-autosuggestions)/' "$HOME/.zshrc"
 
     # This package provides syntax highlighting for the shell zsh.
     # Ref. https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md/#Oh-my-zsh
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
-    sed -i '/^plugins=(/ s/)/ zsh-syntax-highlighting)/' ~/.zshrc
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
+    sed -i '/^plugins=(/ s/)/ zsh-syntax-highlighting)/' "$HOME/.zshrc"
 
     # Powerlevel10k theme
     # Ref. https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#oh-my-zsh
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
-    sed -i 's:^ZSH_THEME=".*":ZSH_THEME="powerlevel10k/powerlevel10k":' ~/.zshrc
+    sed -i 's:^ZSH_THEME=".*":ZSH_THEME="powerlevel10k/powerlevel10k":' "$HOME/.zshrc"
 }
 
 main() {
