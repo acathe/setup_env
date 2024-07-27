@@ -11,18 +11,18 @@
 ## 1. Quick Start
 
 ```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setup/apt.sh")" &&
-  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setup/zsh.sh")" &&
-  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setup/omz.sh")" &&
-  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setup/omz_plugins.sh")" &&
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/apt.sh")" &&
+  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/zsh.sh")" &&
+  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/omz.sh")" &&
+  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/omz_plugins.sh")" &&
 ```
 
 ```bash
 export ENABLE_CHINA_MIRROR=1 &&
-  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setup/apt.sh")" &&
-  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setup/zsh.sh")" &&
-  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setup/omz.sh")" &&
-  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setup/omz_plugins.sh")" &&
+  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/apt.sh")" &&
+  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/zsh.sh")" &&
+  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/omz.sh")" &&
+  bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/omz_plugins.sh")" &&
   unset ENABLE_CHINA_MIRROR
 ```
 
@@ -31,7 +31,7 @@ export ENABLE_CHINA_MIRROR=1 &&
 ### 2.1. APT
 
 ```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setup/apt.sh")"
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/apt.sh")"
 ```
 
 | Environment Variables |
@@ -41,13 +41,13 @@ bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbsta
 ### 2.2. Zsh
 
 ```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setup/zsh.sh")"
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/zsh.sh")"
 ```
 
 ### 2.3. Oh-My-Zsh
 
 ```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setup/omz.sh")"
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/omz.sh")"
 ```
 
 | Environment Variables |
@@ -57,7 +57,7 @@ bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbsta
 ### 2.4. Oh-My-Zsh Plugins
 
 ```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setup/omz_plugins.sh")"
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/omz_plugins.sh")"
 ```
 
 ### 2.5. Git
