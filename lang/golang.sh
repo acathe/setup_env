@@ -29,9 +29,9 @@ main() {
     cat <<EOF | tee -a ~/.zshrc
 # Golang
 export GO111MODULE="on"
-export GOPATH="$HOME/Projects/golang"
-export PATH="/usr/local/go/bin:$PATH"
-export PATH="$GOPATH/bin:$PATH"
+export GOPATH="\$HOME/Projects/golang"
+export PATH="/usr/local/go/bin:\$PATH"
+export PATH="\$GOPATH/bin:\$PATH"
 EOF
 
     if [ -n "$ENABLE_CHINA_MIRROR" ]; then
