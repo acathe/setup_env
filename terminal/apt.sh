@@ -4,7 +4,7 @@
 #   ENABLE_CHINA_MIRROR -
 #
 
-set -e
+set -ex
 
 main() {
     if [ -n "$ENABLE_CHINA_MIRROR" ]; then

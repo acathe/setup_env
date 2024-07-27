@@ -4,7 +4,7 @@
 #   ENABLE_CHINA_MIRROR -
 #
 
-set -e
+set -ex
 
 main() {
     sudo apt-get update

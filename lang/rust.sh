@@ -4,7 +4,7 @@
 #   ENABLE_CHINA_MIRROR   - enable Chinese mirror for subsequent updates.
 #
 
-set -e
+set -ex
 
 main() {
     if [ -n "$ENABLE_CHINA_MIRROR" ]; then

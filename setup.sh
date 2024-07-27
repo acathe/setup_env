@@ -5,7 +5,7 @@
 #   _BRANCH              -
 #
 
-set -e
+set -ex
 
 main() {
     if [ -n "$ENABLE_CHINA_MIRROR" ]; then

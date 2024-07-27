@@ -3,7 +3,7 @@
 #   ENABLE_CHINA_MIRROR -
 #
 
-set -e
+set -ex
 
 main() {
     if [ -z "$(command -v jq)" ]; then
