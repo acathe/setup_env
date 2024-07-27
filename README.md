@@ -6,7 +6,7 @@ Run the script directly to quickly install Zsh, Oh-My-Zsh and its plugins
  on Debian Bookworm.
 
 ```bash
-./main.sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/Acathe/setup_env/orbstack_machines/master/setup_env.sh)"
 ```
 
 ## Instructions
@@ -33,7 +33,7 @@ If you also want to create a global .gitconfig file, you can use the
 ```bash
 SET_GIT_USER_NAME=${your_name} \
 SET_GIT_USER_EMAIL=${your_email} \
-./main.sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/Acathe/setup_env/orbstack_machines/master/setup_env.sh)"
 ```
 
 If you want to use Chinese mirrors for subsequent installations, you can add
@@ -48,7 +48,7 @@ this setting only takes effect for subsequent updates.
 ENABLE_CHINA_MIRROR=1 \
 SET_GIT_USER_NAME=${your_name} \
 SET_GIT_USER_EMAIL=${your_email} \
-./main.sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/Acathe/setup_env/orbstack_machines/master/setup_env.sh)"
 ```
 
 ## 参数
