@@ -2,9 +2,8 @@
 #
 # Respects the following environment variables:
 #   ENABLE_CHINA_MIRROR -
-#   DISENABLE_TEMINAL      -
-#   DISENABLE_LANG         -
-#   _BRANCH             -
+#   DISENABLE_TEMINAL   -
+#   DISENABLE_LANG      -
 #
 
 set -ex

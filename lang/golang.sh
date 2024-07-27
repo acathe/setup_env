@@ -40,6 +40,8 @@ export GOPROXY="https://goproxy.cn,direct"
 export GOSUMDB="sum.golang.google.cn"
 EOF
     fi
+
+    sed -i '/^plugins=(/ s/)/ golang)/' "$HOME/.zshrc"
 }
 
 main "$@"

@@ -16,6 +16,8 @@ main() {
         # Ref. https://mirrors.tuna.tsinghua.edu.cn/help/pypi/#%E8%AE%BE%E4%B8%BA%E9%BB%98%E8%AE%A4
         pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
     fi
+
+    sed -i '/^plugins=(/ s/)/ python)/' "$HOME/.zshrc"
 }
 
 main "$@"

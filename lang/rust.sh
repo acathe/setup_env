@@ -32,6 +32,8 @@ replace-with = 'mirror'
 registry = "sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"
 EOF
     fi
+
+    sed -i '/^plugins=(/ s/)/ rust)/' "$HOME/.zshrc"
 }
 
 main "$@"
