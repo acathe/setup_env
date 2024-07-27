@@ -8,7 +8,7 @@ set -e
 
 main() {
     sudo apt-get update
-    apt-get install python3 python3-pip -y
+    sudo apt-get install python3 python3-pip -y
     sudo apt-get autoremove -y
     sudo apt-get clean
 
