@@ -5,6 +5,7 @@
 # This script is for Debian Linux machines on Orbstack.
 # It is intended for a minimal Debian installation.
 # It will eventually install Zsh, Oh-My-Zsh with some plugins.
+# Optionally, it can also install such as Rust, Python...
 #
 # When using this script, it is recommended to bypass the GFW to install
 #  various software from the official repository.
@@ -15,6 +16,11 @@
 #   ENABLE_CHINA_MIRROR   - enable Chinese mirror for subsequent updates.
 #   SET_GIT_USER_NAME     - set the user.name in global gitconfig.
 #   SET_GIT_USER_EMAIL    - set the user.email in global gitconfig.
+#   SET_GIT_CORE_EDITOR   - set the core.editor in global gitconfig.
+#   ENABLE_INSTALL_CPP    - install cpp.
+#   ENABLE_INSTALL_GOLANG - install Golang.
+#   ENABLE_INSTALL_RUST   - install Rust.
+#   ENABLE_INSTALL_PYTHON - install Python.
 #
 
 set -e
@@ -64,7 +70,9 @@ configure_git() {
     if [ -n "$DEVENV_GIT_USER_EMAIL" ]; then
         git config --global user.email "$DEVENV_GIT_USER_EMAIL"
     fi
-    git config --global core.editor "code --wait"
+    if [ -n "$DEVENV_GIT_CORE_EDITOR" ]; then
+        git config --global core.editor "$DEVENV_GIT_CORE_EDITOR"
+    fi
 }
 
 install_zsh() {
@@ -133,6 +141,97 @@ configure_ohmyzsh() {
     # Ref. https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#oh-my-zsh
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
     sed -i 's/^ZSH_THEME=".*"/ZSH_THEME="powerlevel10k/powerlevel10k"/' ~/.zshrc
+}
+
+install_cpp() {
+    apt-get install build-essential gdb cmake -y
+}
+
+# Specify the Go version to install to.
+# @parameter
+#   - $1: go_version
+install_golang() {
+    local go_version="$1"
+
+    if [[ -z "$go_version" ]]; then
+        echo "Error: No Go version was specified." >&2
+        return 1
+    fi
+
+    update_golang "$go_version"
+
+    # Append Go configuration
+    cat <<EOF | tee -a ~/.zshrc
+# Golang
+export GO111MODULE="on"
+export GOPATH="$HOME/Projects/golang"
+export PATH="/usr/local/go/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
+EOF
+
+    if [ -n "$ENABLE_CHINA_MIRROR" ]; then
+        # Append China proxy
+        cat <<EOF | tee -a ~/.zshrc
+export GOPROXY="https://goproxy.cn,direct"
+export GOSUMDB="sum.golang.google.cn"
+EOF
+    fi
+}
+
+# Specify the Go version to update to.
+# @parameter
+#   - $1: go_version
+update_golang() {
+    local go_version="$1"
+
+    if [[ -z "$go_version" ]]; then
+        echo "Error: No Go version was specified." >&2
+        return 1
+    fi
+
+    local golang_download="https://go.dev/dl/go${go_version}.linux-amd64.tar.gz"
+    if [ -n "$ENABLE_CHINA_MIRROR" ]; then
+        golang_download="https://golang.google.cn/dl/go${go_version}.linux-amd64.tar.gz"
+    fi
+
+    curl --proto '=https' --tlsv1.2 -sSfOL "${golang_download}" &&
+        rm -rf /usr/local/go &&
+        tar -C /usr/local -xzf "./go${go_version}.linux-arm64.tar.gz" &&
+        rm "./go${go_version}.linux-arm64.tar.gz"
+}
+
+install_rust() {
+    if [ -n "$ENABLE_CHINA_MIRROR" ]; then
+        export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
+        export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
+    fi
+
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+    if [ -n "$ENABLE_CHINA_MIRROR" ]; then
+        # https://mirrors.tuna.tsinghua.edu.cn/help/rustup/
+        cat <<EOF | tee -a ~/.zprofile
+# Rust
+export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
+export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
+EOF
+
+        # https://mirrors.tuna.tsinghua.edu.cn/help/crates.io-index/
+        mkdir -vp "${CARGO_HOME:-$HOME/.cargo}"
+        cat <<EOF | tee -a "${CARGO_HOME:-$HOME/.cargo}/config"
+[source.crates-io]
+replace-with = 'mirror'
+
+[source.mirror]
+registry = "sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"
+EOF
+    fi
+}
+
+install_python() {
+    apt-get install python3 python3-pip -y &&
+        python3 -m pip install --upgrade pip &&
+        pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 }
 
 main() {
