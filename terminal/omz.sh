@@ -4,7 +4,7 @@
 #   ENABLE_CHINA_MIRROR -
 #
 
-set -ex
+set -e
 
 main() {
     if [ -z "$(command -v git)" ]; then

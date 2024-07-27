@@ -4,7 +4,7 @@
 #   ENABLE_CHINA_MIRROR   - enable Chinese mirror for subsequent updates.
 #
 
-set -ex
+set -e
 
 main() {
     if [ -n "$ENABLE_CHINA_MIRROR" ]; then
@@ -24,7 +24,7 @@ EOF
     if [ -n "$ENABLE_CHINA_MIRROR" ]; then
         # https://mirrors.tuna.tsinghua.edu.cn/help/crates.io-index/
         mkdir -vp "${CARGO_HOME:-$HOME/.cargo}"
-        cat <<EOF | tee -a "${CARGO_HOME:-$HOME/.cargo}/config"
+        cat <<EOF | tee -a "${CARGO_HOME:-$HOME/.cargo}/config.toml"
 [source.crates-io]
 replace-with = 'mirror'
 

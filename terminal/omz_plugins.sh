@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ex
+set -e
 
 main() {
     sed -i '/^plugins=(/ s/)/ gitignore z vscode)/' "$HOME/.zshrc"

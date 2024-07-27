@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ex
+set -e
 
 main() {
     if [ -z "$(command -v zsh)" ]; then
