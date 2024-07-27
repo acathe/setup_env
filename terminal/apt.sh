@@ -26,10 +26,10 @@ deb https://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security main 
 EOF
     fi
 
-    sudo apt-get update &&
-        sudo apt-get upgrade -y &&
-        sudo apt-get autoremove -y &&
-        sudo apt-get clean
+    sudo apt-get update
+    sudo apt-get upgrade -y
+    sudo apt-get autoremove -y
+    sudo apt-get clean
 }
 
 main "$@"
