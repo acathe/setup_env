@@ -85,10 +85,10 @@ install_zsh() {
         echo "unset -f shopt" >>"$HOME/.tmp.zsh" &&
         cat /etc/zsh/zshrc >>"$HOME/.tmp.zsh" &&
         sudo mv "$HOME/.tmp.zsh" /etc/zsh/zshrc
-    echo "source $HOME/.bash_logout" >"$HOME/.zlogout" # sync ~/.zlogout
-    echo "source $HOME/.profile" >"$HOME/.zprofile"    # sync ~/.zprofile
-    echo "shopt() {}" >"$HOME/.zshrc" &&               # sync ~/.zshrc
-        echo "source /etc/bash.bashrc" >>"$HOME/.zshrc" &&
+    echo "source ~/.bash_logout" >"$HOME/.zlogout" # sync ~/.zlogout
+    echo "source ~/.profile" >"$HOME/.zprofile"    # sync ~/.zprofile
+    echo "shopt() {}" >"$HOME/.zshrc" &&           # sync ~/.zshrc
+        echo "source ~/.bashrc" >>"$HOME/.zshrc" &&
         echo "unset -f shopt" >>"$HOME/.zshrc"
 }
 
