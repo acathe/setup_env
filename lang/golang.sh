@@ -22,8 +22,8 @@ main() {
     fi
 
     curl --proto '=https' --tlsv1.2 -sSfOL "${golang_download}"
-    rm -rf /usr/local/go
-    tar -C /usr/local -xzf "./${go_version}.linux-amd64.tar.gz"
+    sudo rm -rf /usr/local/go
+    sudo tar -C /usr/local -xzf "./${go_version}.linux-amd64.tar.gz"
     rm "./${go_version}.linux-amd64.tar.gz"
 
     cat <<EOF | tee -a ~/.zshrc
