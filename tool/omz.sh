@@ -1,17 +1,15 @@
 #!/usr/bin/env bash
 #
 # Respects the following environment variables:
-#   ENABLE_CHINA_MIRROR -
+# - ENABLE_CHINA_MIRROR
 #
 
 set -e
 
 main() {
-    # Ensure that Git is installed, and if not, it will trigger the installation.
-    if [ -z "$(command -v git)" ]; then
-        git -v
-        return 1
-    fi
+    # install git.
+    # Ref. https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git
+    git -v
 
     local remote
     if [ -n "$ENABLE_CHINA_MIRROR" ]; then
