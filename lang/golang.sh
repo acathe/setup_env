@@ -26,17 +26,16 @@ main() {
     sudo tar -C /usr/local -xzf "./${go_version}.linux-amd64.tar.gz"
     rm "./${go_version}.linux-amd64.tar.gz"
 
+    tee -a ~/.zprofile <<EOF
+# Golang
+export PATH="/usr/local/go/bin:\$PATH"
+export PATH="\$(go env GOPATH)/bin:\$PATH"
+EOF
     export PATH="/usr/local/go/bin:$PATH"
     go env -w GO111MODULE="on"
     go env -w GOPATH="$HOME/Projects/golang"
     PATH="$(go env GOPATH)/bin:$PATH"
     export PATH
-
-    cat <<EOF | tee -a ~/.zprofile
-# Golang
-export PATH="/usr/local/go/bin:\$PATH"
-export PATH="\$(go env GOPATH)/bin:\$PATH"
-EOF
 
     if [ -n "$ENABLE_CHINA_MIRROR" ]; then
         go env -w GOPROXY="https://goproxy.cn,direct"
