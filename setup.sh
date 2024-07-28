@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 #
 # Respects the following environment variables:
-#   ENABLE_CHINA_MIRROR -
+# - ENABLE_CHINA_MIRROR
 #
 
 set -e
 
 main() {
-
     if [ -n "$ENABLE_CHINA_MIRROR" ]; then
         export ENABLE_CHINA_MIRROR=1
     fi
