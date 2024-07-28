@@ -16,9 +16,7 @@ main() {
         local remote=https://mirrors.tuna.tsinghua.edu.cn/git/ohmyzsh.git
     fi
 
-    # Use RUNZSH=no to skip running Zsh and prevent interrupting the script.
     # Ref. https://ohmyz.sh/#install
-    # RUNZSH=no \
     REMOTE="$remote" sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
     # Sync the previous ~/.zshrc with Oh-My-Zsh.
