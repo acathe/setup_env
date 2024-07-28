@@ -11,7 +11,7 @@
 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/master/setup.sh")"
 ```
 
-You can also use `ENABLE_CHINA_MIRROR` to receive subsequent updates.
+You can also use `ENABLE_CHINA_MIRROR` to receive subsequent updates from Chinese mirrors.
 
 ```bash
 ENABLE_CHINA_MIRROR=1 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/master/setup.sh")"
@@ -26,8 +26,6 @@ bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/
 | Environment Variables |
 | :-: |
 | `ENABLE_CHINA_MIRROR=1` |
-
----
 
 Restart the terminal to configure Powerlevel10k.
 
@@ -50,7 +48,5 @@ bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/
 ```bash
 brew install --cask visual-studio-code orbstack
 ```
-
----
 
 Orbstack can use a [Chinese mirror](https://dockerproxy.com).
