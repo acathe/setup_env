@@ -1,11 +1,11 @@
-# Setup Env- [1. Oh My Zsh](#1-oh-my-zsh)
+# Setup Env
 
-- [~~Quick Start~~](#quick-start)
-- [1. Oh My Zsh](#1-oh-my-zsh)
-- [2. Homebrew](#2-homebrew)
-- [3. Linux Env](#3-linux-env)
+- [1. Quick Start](#1-quick-start)
+- [2. Oh My Zsh](#2-oh-my-zsh)
+- [3. Homebrew](#3-homebrew)
+- [4. Linux Env](#4-linux-env)
 
-## ~~Quick Start~~
+## 1. Quick Start
 
 ```bash
 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/master/setup.sh")"
@@ -15,15 +15,17 @@ bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/
 ENABLE_CHINA_MIRROR=1 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/master/setup.sh")"
 ```
 
-## 1. Oh My Zsh
+## 2. Oh My Zsh
 
 ```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/master/terminal/omz.sh")"
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/master/tool/omz.sh")"
 ```
 
-```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/master/terminal/omz-plugins.sh")"
-```
+| Environment Variables |
+| :-: |
+| `ENABLE_CHINA_MIRROR=1` |
+
+---
 
 - [下载链接](https://ohmyz.sh/#install)
 - [国内源](https://mirrors.tuna.tsinghua.edu.cn/help/ohmyzsh.git/#%E5%88%87%E6%8D%A2%E5%B7%B2%E6%9C%89%20ohmyzsh%20%E8%87%B3%E9%95%9C%E5%83%8F%E6%BA%90)
@@ -36,11 +38,17 @@ bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/
 plugins=(z brew vscode zsh-autosuggestions zsh-syntax-highlighting)
 ```
 
-## 2. Homebrew
+## 3. Homebrew
 
 ```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/master/terminal/homebrew.sh")"
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/master/tool/homebrew.sh")"
 ```
+
+| Environment Variables |
+| :-: |
+| `ENABLE_CHINA_MIRROR=1` |
+
+---
 
 - [下载链接](https://brew.sh/zh-cn/)
 - 国内源：
@@ -51,7 +59,7 @@ bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/
 brew install --cask visual-studio-code
 ```
 
-## 3. Linux Env
+## 4. Linux Env
 
 ```bash
 brew install --cask orbstack
