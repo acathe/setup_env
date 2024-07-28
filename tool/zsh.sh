@@ -10,22 +10,19 @@ main() {
         sudo apt-get clean
     fi
 
-    # Sync /etc/zsh/zshenv
-    {
+    { # sync /etc/zsh/zshenv
         echo "source /etc/environment"
         cat /etc/zsh/zshenv
     } >"$HOME/.tmp.zsh"
     sudo mv "$HOME/.tmp.zsh" /etc/zsh/zshenv
 
-    # Sync /etc/zsh/zprofile
-    {
+    { # sync /etc/zsh/zprofile
         echo "source /etc/profile"
         cat /etc/zsh/zprofile
     } >"$HOME/.tmp.zsh"
     sudo mv "$HOME/.tmp.zsh" /etc/zsh/zprofile
 
-    # Sync /etc/zsh/zshrc
-    {
+    { # sync /etc/zsh/zshrc
         echo "shopt() {}"
         echo "source /etc/bash.bashrc"
         echo "unset -f shopt"
@@ -33,14 +30,13 @@ main() {
     } >"$HOME/.tmp.zsh"
     sudo mv "$HOME/.tmp.zsh" /etc/zsh/zshrc
 
-    # Sync ~/.zlogout
+    # sync ~/.zlogout
     echo "source ~/.bash_logout" >"$HOME/.zlogout"
 
-    # Sync ~/.zprofile
+    # sync ~/.zprofile
     echo "source ~/.profile" >"$HOME/.zprofile"
 
-    # Sync ~/.zshrc
-    {
+    { # sync ~/.zshrc
         echo "shopt() {}"
         echo "source ~/.bashrc"
         echo "unset -f shopt"

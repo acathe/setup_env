@@ -18,9 +18,15 @@
 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setup.sh")"
 ```
 
+You can also use `ENABLE_CHINA_MIRROR` to receive subsequent updates from Chinese mirrors.
+
 ```bash
 ENABLE_CHINA_MIRROR=1 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setup.sh")"
 ```
+
+Please note that it will not configure Golang and Git for you.
+
+However, there are specific configuration scripts for them below that you can use directly.
 
 ## 2. Tools
 
