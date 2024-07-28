@@ -8,7 +8,7 @@ main() {
 
     cat <<EOF | tee -a ~/.zprofile
 # Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "\$(/opt/homebrew/bin/brew shellenv)"
 EOF
 
     if [ -n "$ENABLE_CHINA_MIRROR" ]; then
@@ -34,7 +34,6 @@ EOF
 
     brew update
     brew upgrade
-    brew install --cask visual-studio-code orbstack
 }
 
 main "$@"

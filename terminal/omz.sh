@@ -16,16 +16,10 @@ main() {
         local remote=https://mirrors.tuna.tsinghua.edu.cn/git/ohmyzsh.git
     fi
 
+    # Use RUNZSH=no to skip running Zsh and prevent interrupting the script.
     # Ref. https://ohmyz.sh/#install
-    REMOTE="$remote" sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-    # Sync the previous ~/.zshrc with Oh-My-Zsh.
-    # cat "$HOME/.zshrc.pre-oh-my-zsh" >"$HOME/.tmp.zsh"
-    # cat "$HOME/.zshrc" >>"$HOME/.tmp.zsh"
-    # mv "$HOME/.tmp.zsh" "$HOME/.zshrc"
-
-    # # Remove backup files
-    # rm "$HOME/.shell.pre-oh-my-zsh" "$HOME/.zshrc.pre-oh-my-zsh"
+    RUNZSH=no REMOTE="$remote" \
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
 
 main "$@"
