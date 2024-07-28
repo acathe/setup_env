@@ -12,8 +12,8 @@ main() {
         export ENABLE_CHINA_MIRROR=1
     fi
 
-    bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/master/terminal/omz.sh")"
-    bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/master/terminal/homebrew.sh")"
+    bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/master/tool/omz.sh")"
+    bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/master/tool/homebrew.sh")"
 
     unset ENABLE_CHINA_MIRROR
 }
