@@ -1,11 +1,11 @@
 # Setup Env- [1. Oh My Zsh](#1-oh-my-zsh)
 
-- [~~Quick Start~~](#quick-start)
+- [Quick Start](#quick-start)
 - [1. Oh My Zsh](#1-oh-my-zsh)
 - [2. Homebrew](#2-homebrew)
 - [3. Linux Env](#3-linux-env)
 
-## ~~Quick Start~~
+## Quick Start
 
 ```bash
 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/master/setup.sh")"
@@ -19,10 +19,6 @@ ENABLE_CHINA_MIRROR=1 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/a
 
 ```bash
 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/master/terminal/omz.sh")"
-```
-
-```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/master/terminal/omz-plugins.sh")"
 ```
 
 - [下载链接](https://ohmyz.sh/#install)

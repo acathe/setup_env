@@ -13,7 +13,6 @@ main() {
     fi
 
     bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/master/terminal/omz.sh")"
-    bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/master/terminal/omz_plugins.sh")"
     bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/macos/master/terminal/homebrew.sh")"
 
     unset ENABLE_CHINA_MIRROR
