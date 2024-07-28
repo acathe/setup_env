@@ -1,13 +1,12 @@
 # Setup Env
 
 - [1. Quick Start](#1-quick-start)
-- [2. Terminal](#2-terminal)
+- [2. Tools](#2-tools)
   - [2.1. APT](#21-apt)
   - [2.2. Zsh](#22-zsh)
   - [2.3. Oh-My-Zsh](#23-oh-my-zsh)
-  - [2.4. Oh-My-Zsh Plugins](#24-oh-my-zsh-plugins)
-  - [2.5. Git](#25-git)
-- [3. Lang](#3-lang)
+  - [2.4. Git](#24-git)
+- [3. Langs](#3-langs)
   - [3.1. Cpp](#31-cpp)
   - [3.2. Golang](#32-golang)
   - [3.3. Rust](#33-rust)
@@ -23,12 +22,12 @@ bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbsta
 ENABLE_CHINA_MIRROR=1 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setup.sh")"
 ```
 
-## 2. Terminal
+## 2. Tools
 
 ### 2.1. APT
 
 ```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/apt.sh")"
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/tool/apt.sh")"
 ```
 
 | Environment Variables |
@@ -38,26 +37,20 @@ bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbsta
 ### 2.2. Zsh
 
 ```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/zsh.sh")"
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/tool/zsh.sh")"
 ```
 
 ### 2.3. Oh-My-Zsh
 
 ```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/omz.sh")"
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/tool/omz.sh")"
 ```
 
 | Environment Variables |
 | :-: |
 | `ENABLE_CHINA_MIRROR=1` |
 
-### 2.4. Oh-My-Zsh Plugins
-
-```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/setups/omz_plugins.sh")"
-```
-
-### 2.5. Git
+### 2.4. Git
 
 ```bash
 git config --global user.name "${your_name}" &&
@@ -65,7 +58,7 @@ git config --global user.name "${your_name}" &&
   git config --global core.editor "code --wait"
 ```
 
-## 3. Lang
+## 3. Langs
 
 ### 3.1. Cpp
 
