@@ -21,6 +21,7 @@ terminals::omz::install() {
 
     if [ -f "${HOME}/.zshrc.pre-oh-my-zsh" ]; then
         cat "${HOME}/.zshrc.pre-oh-my-zsh" >"${HOME}/.tmp.zsh"
+        echo >>"${HOME}/.tmp.zsh"
         cat "${HOME}/.zshrc" >>"${HOME}/.tmp.zsh"
         mv "${HOME}/.tmp.zsh" "${HOME}/.zshrc"
         rm "${HOME}/.zshrc.pre-oh-my-zsh"

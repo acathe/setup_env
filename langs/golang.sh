@@ -38,6 +38,10 @@ langs::golang::install() {
 }
 
 langs::golang::set_env() {
+    if [ -s "${HOME}/.zprofile" ]; then
+        echo >>"${HOME}/.zprofile"
+    fi
+
     tee -a "${HOME}/.zprofile" <<EOF
 # Golang
 export PATH="/usr/local/go/bin:\${PATH}"

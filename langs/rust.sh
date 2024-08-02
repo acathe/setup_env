@@ -2,6 +2,10 @@
 
 langs::rust::install() {
     if [ -n "${ENABLE_CHINA_MIRROR}" ]; then
+        if [ -s "${HOME}/.zprofile" ]; then
+            echo >>"${HOME}/.zprofile"
+        fi
+
         # Ref. https://mirrors.tuna.tsinghua.edu.cn/help/rustup/
         tee -a ~/.zprofile <<EOF
 # Rust
@@ -18,8 +22,13 @@ EOF
 
 langs::rust::set_env() {
     if [ -n "${ENABLE_CHINA_MIRROR}" ]; then
-        # Ref. https://mirrors.tuna.tsinghua.edu.cn/help/crates.io-index/
         mkdir -p "${CARGO_HOME:-${HOME}/.cargo}"
+
+        if [ -s "${CARGO_HOME:-${HOME}/.cargo}/config.toml" ]; then
+            echo >>"${CARGO_HOME:-${HOME}/.cargo}/config.toml"
+        fi
+
+        # Ref. https://mirrors.tuna.tsinghua.edu.cn/help/crates.io-index/
         tee -a "${CARGO_HOME:-${HOME}/.cargo}/config.toml" <<EOF
 [source.crates-io]
 replace-with = 'mirror'
