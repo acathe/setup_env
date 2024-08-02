@@ -2,7 +2,8 @@
 
 set -ex
 
-source "./langs/golang_test.sh"
+# shellcheck source-path=..
+source "./debian/langs/golang_test.sh"
 
 testing() {
     testing::langs::golang::_get_package

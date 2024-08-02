@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# shellcheck source-path=..
-source "./tools/jq.sh"
+# shellcheck source-path=../..
+source "./debian/tools/jq.sh"
 
 langs::golang::_get_package() {
     local go_version os_type arch

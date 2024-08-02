@@ -7,7 +7,7 @@ langs::rust::install() {
         fi
 
         # Ref. https://mirrors.tuna.tsinghua.edu.cn/help/rustup/
-        tee -a ~/.zprofile <<EOF
+        tee -a "${HOME}/.zprofile" <<EOF
 # Rust
 export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
 export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup

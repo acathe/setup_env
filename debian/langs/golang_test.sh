@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# shellcheck source-path=..
-source "./langs/golang.sh"
+# shellcheck source-path=../..
+source "./debian/langs/golang.sh"
 
 testing::langs::golang::_get_package() {
     {
