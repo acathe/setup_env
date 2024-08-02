@@ -2,19 +2,19 @@
 
 langs::rust::install() {
     if [ -n "${ENABLE_CHINA_MIRROR}" ]; then
+        # Ref. https://mirrors.tuna.tsinghua.edu.cn/help/rustup/
+        export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
+        export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
+
         if [ -s "${HOME}/.zprofile" ]; then
             echo >>"${HOME}/.zprofile"
         fi
 
-        # Ref. https://mirrors.tuna.tsinghua.edu.cn/help/rustup/
         tee -a "${HOME}/.zprofile" <<EOF
 # Rust
 export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
 export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
 EOF
-
-        export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
-        export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
     fi
 
     curl --proto '=https' --tlsv1.2 -sSf "https://sh.rustup.rs" | sh -s -- -y

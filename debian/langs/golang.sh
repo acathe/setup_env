@@ -38,6 +38,14 @@ langs::golang::install() {
 }
 
 langs::golang::set_env() {
+    export PATH="/usr/local/go/bin:${PATH}"
+
+    go env -w GO111MODULE="on"
+    go env -w GOPATH="${HOME}/Projects/golang"
+
+    PATH="$(go env GOPATH)/bin:${PATH}"
+    export PATH
+
     if [ -s "${HOME}/.zprofile" ]; then
         echo >>"${HOME}/.zprofile"
     fi
@@ -47,14 +55,6 @@ langs::golang::set_env() {
 export PATH="/usr/local/go/bin:\${PATH}"
 export PATH="\$(go env GOPATH)/bin:\${PATH}"
 EOF
-
-    export PATH="/usr/local/go/bin:${PATH}"
-
-    go env -w GO111MODULE="on"
-    go env -w GOPATH="${HOME}/Projects/golang"
-
-    PATH="$(go env GOPATH)/bin:${PATH}"
-    export PATH
 
     if [ -n "$ENABLE_CHINA_MIRROR" ]; then
         go env -w GOPROXY="https://proxy.golang.com.cn,https://proxy.golang.com,direct"
