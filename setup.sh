@@ -26,6 +26,9 @@ main() {
 
     bash "./main.sh"
 
+    cd ".."
+    rm -rf "./.setup_env"
+
     return 0
 }
 
