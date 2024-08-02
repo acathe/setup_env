@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ex
+set -e
 
 source "./option.sh"
 source "./terminals/apt.sh"
