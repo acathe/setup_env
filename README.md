@@ -33,7 +33,7 @@ However, there are specific configuration scripts for them below that you can us
 ### 2.1. APT
 
 ```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/tool/apt.sh")"
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/tools/apt.sh")"
 ```
 
 | Environment Variables |
@@ -43,13 +43,13 @@ bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbsta
 ### 2.2. Zsh
 
 ```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/tool/zsh.sh")"
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/tools/zsh.sh")"
 ```
 
 ### 2.3. Oh-My-Zsh
 
 ```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/tool/omz.sh")"
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/tools/omz.sh")"
 ```
 
 | Environment Variables |
@@ -69,13 +69,13 @@ git config --global user.name "${your_name}" &&
 ### 3.1. Cpp
 
 ```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/lang/cpp.sh")"
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/langs/cpp.sh")"
 ```
 
 ### 3.2. Golang
 
 ```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/lang/golang.sh")"
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/langs/golang.sh")"
 ```
 
 | Environment Variables |
@@ -85,7 +85,7 @@ bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbsta
 ### 3.3. Rust
 
 ```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/lang/rust.sh")"
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/langs/rust.sh")"
 ```
 
 | Environment Variables |
@@ -95,7 +95,7 @@ bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbsta
 ### 3.4. Python
 
 ```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/lang/python.sh")"
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/langs/python.sh")"
 ```
 
 | Environment Variables |

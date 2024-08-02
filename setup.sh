@@ -1,27 +1,39 @@
 #!/usr/bin/env bash
-#
-# Respects the following environment variables:
-# - ENABLE_CHINA_MIRROR
-#
 
 set -e
 
-main() {
-    if [ -n "$ENABLE_CHINA_MIRROR" ]; then
-        export ENABLE_CHINA_MIRROR=1
-    fi
-
-    bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/tool/apt.sh")"
-    bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/tool/zsh.sh")"
-    bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/tool/omz.sh")"
-    bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/tool/omz_plugins.sh")"
-
-    bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/lang/cpp.sh")"
-    # bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/lang/golang.sh")"
-    bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/lang/rust.sh")"
-    bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/orbstack_machines/master/lang/python.sh")"
-
-    unset ENABLE_CHINA_MIRROR
+install_git() {
+    sudo apt-get update
+    sudo apt-get install git -y
+    sudo apt-get autoremove -y
+    sudo apt-get clean
 }
 
-main "$@"
+main() {
+    if [ -d "./.setup_env" ]; then
+        echo "Error: .setup_env directory already exists." >&2
+        return 1
+    fi
+
+    if [ -z "$(command -v git)" ]; then
+        install_git
+    fi
+
+    if [[ -z "${_BRANCH}" ]]; then
+        _BRANCH="orbstack_machines/master"
+    fi
+
+    git clone --depth 1 --branch "${_BRANCH}" https://github.com/acathe/setup_env.git ./.setup_env
+    cd "./.setup_env"
+
+    bash "./main.sh"
+
+    return 0
+}
+
+if [[ -z "${NO_SOURCE_SETUP}" ]]; then
+    main "$@"
+else
+    echo "Error: sourced setup.sh is set." >&2
+    exit 1
+fi
