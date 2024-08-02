@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# shellcheck source-path=..
-source "./terminals/git.sh"
+# shellcheck source-path=../..
+source "./debian/terminals/git.sh"
 
 terminals::omz::install() {
     local remote

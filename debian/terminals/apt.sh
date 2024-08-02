@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# shellcheck source-path=..
-source "./utils/utils.sh"
+# shellcheck source-path=../..
+source "./debian/utils/utils.sh"
 
 terminals::apt::replace_mirror() {
     if [ ! -f "/etc/os-release" ]; then
