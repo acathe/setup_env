@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-set -e
-
-source "./utils.sh"
+# shellcheck source-path=..
+source "./utils/utils.sh"
 
 testing::utils::load_vars_from_file() {
     {
@@ -19,13 +18,5 @@ testing::utils::load_vars_from_file() {
             exit 2
         fi
     }
-    echo "All tests passed!"
+    echo "utils::load_vars_from_file all tests passed!"
 }
-
-testing() {
-    testing::utils::load_vars_from_file
-}
-
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    testing "$@"
-fi

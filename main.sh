@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -ex
 
 source "./option.sh"
 source "./terminals/apt.sh"
@@ -13,6 +13,8 @@ source "./langs/rust.sh"
 source "./langs/python.sh"
 
 main() {
+    sudo apt-get update
+
     if ((SETUP_TERMINALS_APT != 0)); then
         terminals::apt::setup
     fi
@@ -44,6 +46,9 @@ main() {
     if ((SETUP_LANGS_PYTHON != 0)); then
         langs::python::setup
     fi
+
+    sudo apt-get autoremove -y
+    sudo apt-get clean
 
     return 0
 }

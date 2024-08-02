@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 
 terminals::git::install() {
-    sudo apt-get update
     sudo apt-get install git -y
-    sudo apt-get autoremove -y
-    sudo apt-get clean
 }
 
 terminals::git::set_env() {

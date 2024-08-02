@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 
 terminals::zsh::install() {
-    sudo apt-get update
     sudo apt-get install zsh -y
-    sudo apt-get autoremove -y
-    sudo apt-get clean
 }
 
 terminals::zsh::_sync_from_bash() {

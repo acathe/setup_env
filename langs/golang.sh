@@ -29,7 +29,7 @@ langs::golang::_get_download() {
 langs::golang::install() {
     local go_pkg golang_download
     go_pkg="$(langs::golang::_get_package)"
-    go_download="$(langs::golang::_get_package)"
+    go_download="$(langs::golang::_get_download)"
 
     curl --proto '=https' --tlsv1.2 -sSfOL "${go_download}/${go_pkg}"
     sudo rm -rf "/usr/local/go"

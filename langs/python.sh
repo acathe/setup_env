@@ -1,24 +1,15 @@
 #!/usr/bin/env bash
 
 langs::python::install() {
-    sudo apt-get update
     sudo apt-get install python3 -y
-    sudo apt-get autoremove -y
-    sudo apt-get clean
 }
 
 langs::python::install_venv() {
-    sudo apt-get update
     sudo apt-get install python3-venv -y
-    sudo apt-get autoremove -y
-    sudo apt-get clean
 }
 
 langs::python::install_pip() {
-    sudo apt-get update
     sudo apt-get install python3-pip -y
-    sudo apt-get autoremove -y
-    sudo apt-get clean
 
     if [ -n "${ENABLE_CHINA_MIRROR}" ]; then
         # Ref. https://mirrors.tuna.tsinghua.edu.cn/help/pypi/#%E8%AE%BE%E4%B8%BA%E9%BB%98%E8%AE%A4
