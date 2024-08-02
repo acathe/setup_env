@@ -1,0 +1,5 @@
+[user]
+    name = 朱成锐
+    email = chengrui.zhu@icloud.com
+[core]
+    editor = code --wait
