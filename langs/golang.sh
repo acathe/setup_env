@@ -47,7 +47,7 @@ EOF
     export PATH="/usr/local/go/bin:${PATH}"
 
     go env -w GO111MODULE="on"
-    go env -w GOPATH="\${HOME}/Projects/golang"
+    go env -w GOPATH="${HOME}/Projects/golang"
 
     PATH="$(go env GOPATH)/bin:${PATH}"
     export PATH

@@ -5,8 +5,6 @@ set -ex
 install_git() {
     sudo apt-get update
     sudo apt-get install git -y
-    sudo apt-get autoremove -y
-    sudo apt-get clean
 }
 
 main() {
