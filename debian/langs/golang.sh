@@ -10,8 +10,18 @@ langs::golang::_get_package() {
         curl --proto '=https' --tlsv1.2 -sSfL https://go.dev/dl/?mode=json |
             jq -r '.[0].version'
     )"
+
     os_type="$(uname -s)"
-    arch="$(uname -m | sed 's/x86_64/amd64/')"
+
+    arch="$(uname -m)"
+    case "${arch}" in
+    "x86_64")
+        arch="amd64"
+        ;;
+    "aarch64")
+        arch="arm64"
+        ;;
+    esac
 
     echo "${go_version}.${os_type,,}-${arch}.tar.gz"
 }
