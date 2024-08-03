@@ -7,8 +7,6 @@ source "./macos/option.sh"
 # shellcheck source-path=..
 source "./macos/terminals/homebrew.sh"
 # shellcheck source-path=..
-source "./macos/terminals/git.sh"
-# shellcheck source-path=..
 source "./macos/terminals/omz.sh"
 
 main() {
@@ -18,10 +16,6 @@ main() {
 
     if ((SETUP_TERMINALS_HOMEBREW != 0)); then
         terminals::homebrew::setup
-    fi
-
-    if ((SETUP_TERMINALS_GIT != 0)); then
-        terminals::git::setup
     fi
 
     if ((SETUP_TERMINALS_OMZ != 0)); then

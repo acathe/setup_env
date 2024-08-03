@@ -30,7 +30,7 @@ bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/master
 ```
 
 ```bash
-ENABLE_CHINA_MIRROR=1 GIT_USER_NAME=${your_name} GIT_USER_EMAIL=${your_email} bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/master/macos.sh")"
+ENABLE_CHINA_MIRROR=1 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/master/macos.sh")"
 ```
 
 ## 2. Debian
