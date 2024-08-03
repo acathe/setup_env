@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # shellcheck source-path=../..
-source "./debian/tools/jq.sh"
+source "./debian/tools/tools.sh"
 
 langs::golang::_get_package() {
     local go_version os_type arch
@@ -76,7 +76,7 @@ EOF
 
 langs::golang::setup() {
     if [ -z "$(command -v jq)" ]; then
-        tools::jq::install
+        tools::install_jq
     fi
 
     langs::golang::install

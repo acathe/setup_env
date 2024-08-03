@@ -63,7 +63,7 @@ ENABLE_CHINA_MIRROR=1 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/a
 | Install | note. |
 | :-: | :- |
 | C++ | |
-| Golang | Default disable. |
+| Golang | Default **disable**. |
 | Rust | Use Tsinghua Mirror. |
 | Python | Use Tsinghua Mirror. |
 
@@ -90,6 +90,7 @@ You will need to set them up in your terminal manually.
 | :-: | :- |
 | Orbstack | |
 | Visual Studio Code | |
+| ChatGPT | |
 
 ## 4. MacOS Server
 

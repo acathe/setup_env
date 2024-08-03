@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-tools::jq::install() {
+tools::install_jq() {
     sudo apt-get install jq -y
 }
