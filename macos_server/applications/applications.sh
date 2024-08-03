@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-applications::utm::install() {
+applications::install_utm() {
     brew install --cask utm
 }

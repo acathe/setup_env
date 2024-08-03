@@ -7,7 +7,7 @@ source "./macos_server/option.sh"
 # shellcheck source-path=..
 source "./macos_server/terminals/homebrew.sh"
 # shellcheck source-path=..
-source "./macos_server/applications/utm.sh"
+source "./macos_server/applications/applications.sh"
 
 main() {
     # install git.
@@ -19,7 +19,7 @@ main() {
     fi
 
     if ((INSTALL_APPLICATIONS_UTM != 0)); then
-        applications::utm::install
+        applications::install_utm
     fi
 
     return 0
