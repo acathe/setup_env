@@ -49,10 +49,7 @@ terminals::omz::install_plugins() {
     # Ref. https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#oh-my-zsh
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/themes/powerlevel10k"
     sed -i '' 's:^ZSH_THEME=".*":ZSH_THEME="powerlevel10k/powerlevel10k":' "${HOME}/.zshrc"
-    curl --proto '=https' --tlsv1.2 -sSfL https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf -o "${HOME}/Downloads/MesloLGS NF Regular.ttf"
-    curl --proto '=https' --tlsv1.2 -sSfL https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf -o "${HOME}/Downloads/MesloLGS NF Bold.ttf"
-    curl --proto '=https' --tlsv1.2 -sSfL https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf -o "${HOME}/Downloads/MesloLGS NF Italic.ttf"
-    curl --proto '=https' --tlsv1.2 -sSfL https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf -o "${HOME}/Downloads/MesloLGS NF Bold Italic.ttf"
+    brew install --cask font-meslo-for-powerlevel10k
 }
 
 terminals::omz::setup() {
