@@ -7,6 +7,17 @@ install_git() {
     sudo apt-get install git -y
 }
 
+option() {
+    export SETUP_TERMINALS_APT=1
+    export SETUP_TERMINALS_GIT=1
+    export SETUP_TERMINALS_ZSH=1
+    export SETUP_TERMINALS_OMZ=1
+    export SETUP_LANGS_CPP=1
+    export SETUP_LANGS_GOLANG=0 # default disable
+    export SETUP_LANGS_RUST=1
+    export SETUP_LANGS_PYTHON=1
+}
+
 main() {
     if [ -d "./.setup_env" ]; then
         echo "Error: .setup_env directory already exists." >&2
@@ -24,6 +35,7 @@ main() {
     git clone --depth 1 --branch "${_BRANCH}" https://github.com/acathe/setup_env.git ./.setup_env
     cd "./.setup_env"
 
+    option
     bash "./debian/main.sh"
 
     cd ".."

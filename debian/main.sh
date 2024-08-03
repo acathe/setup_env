@@ -3,8 +3,6 @@
 set -e
 
 # shellcheck source-path=..
-source "./debian/option.sh"
-# shellcheck source-path=..
 source "./debian/terminals/apt.sh"
 # shellcheck source-path=..
 source "./debian/terminals/git.sh"

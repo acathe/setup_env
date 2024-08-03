@@ -2,6 +2,11 @@
 
 set -e
 
+option() {
+    export SETUP_TERMINALS_HOMEBREW=1
+    export INSTALL_APPLICATIONS_UTM=1
+}
+
 main() {
     if [ -d "./.setup_env" ]; then
         echo "Error: .setup_env directory already exists." >&2
@@ -17,7 +22,8 @@ main() {
     git clone --depth 1 --branch "${_BRANCH}" https://github.com/acathe/setup_env.git ./.setup_env
     cd "./.setup_env"
 
-    bash "./macos_server/main.sh"
+    option
+    bash "./macos/main.sh"
 
     cd ".."
     rm -rf "./.setup_env"

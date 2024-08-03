@@ -3,8 +3,6 @@
 set -e
 
 # shellcheck source-path=..
-source "./macos/option.sh"
-# shellcheck source-path=..
 source "./macos/terminals/homebrew.sh"
 # shellcheck source-path=..
 source "./macos/terminals/omz.sh"
@@ -34,6 +32,10 @@ main() {
 
     if ((INSTALL_APPLICATIONS_CHATGPT != 0)); then
         applications::install_chatgpt
+    fi
+
+    if ((INSTALL_APPLICATIONS_UTM != 0)); then
+        applications::install_utm
     fi
 
     return 0

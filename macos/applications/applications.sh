@@ -11,3 +11,7 @@ applications::install_vscode() {
 applications::install_chatgpt() {
     brew install --cask chatgpt
 }
+
+applications::install_utm() {
+    brew install --cask utm
+}
