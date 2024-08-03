@@ -3,15 +3,11 @@
 set -e
 
 # shellcheck source-path=..
-source "./macos/option.sh"
-# shellcheck source-path=..
 source "./macos/terminals/homebrew.sh"
 # shellcheck source-path=..
 source "./macos/terminals/omz.sh"
 # shellcheck source-path=..
-source "./macos/applications/orbstack.sh"
-# shellcheck source-path=..
-source "./macos/applications/vscode.sh"
+source "./macos/applications/applications.sh"
 
 main() {
     # install git.
@@ -27,11 +23,19 @@ main() {
     fi
 
     if ((INSTALL_APPLICATIONS_ORBSTACK != 0)); then
-        applications::orbstack::install
+        applications::install_orbstack
     fi
 
     if ((INSTALL_APPLICATIONS_VSCODE != 0)); then
-        applications::vscode::install
+        applications::install_vscode
+    fi
+
+    if ((INSTALL_APPLICATIONS_CHATGPT != 0)); then
+        applications::install_chatgpt
+    fi
+
+    if ((INSTALL_APPLICATIONS_UTM != 0)); then
+        applications::install_utm
     fi
 
     return 0
