@@ -3,13 +3,17 @@
 - [1. Quick Start](#1-quick-start)
   - [1.1. Debian](#11-debian)
   - [1.2. MacOS](#12-macos)
+  - [1.3. MacOS Server](#13-macos-server)
 - [2. Debian](#2-debian)
   - [2.1. Terminals](#21-terminals)
   - [2.2. Langs](#22-langs)
 - [3. MacOS](#3-macos)
   - [3.1. Terminals](#31-terminals)
   - [3.2. Powerlevel10k](#32-powerlevel10k)
-  - [3.3. Application](#33-application)
+  - [3.3. Applications](#33-applications)
+- [4. MacOS Server](#4-macos-server)
+  - [4.1. Terminals](#41-terminals)
+  - [4.2. Applications](#42-applications)
 
 ## 1. Quick Start
 
@@ -31,6 +35,16 @@ bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/master
 
 ```bash
 ENABLE_CHINA_MIRROR=1 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/master/macos.sh")"
+```
+
+### 1.3. MacOS Server
+
+```bash
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/master/macos_server.sh")"
+```
+
+```bash
+ENABLE_CHINA_MIRROR=1 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/master/macos_server.sh")"
 ```
 
 ## 2. Debian
@@ -60,21 +74,35 @@ ENABLE_CHINA_MIRROR=1 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/a
 | Install | note. |
 | :-: | :- |
 | HomeBrew | Use Tsinghua Mirror. |
-| Git | |
 | Oh-My-Zsh | Use Tsinghua Mirror. |
 
 ### 3.2. Powerlevel10k
 
 Restart the terminal to configure Powerlevel10k.
 
-The script will download the fonts required for the Powerlevel10k theme into the `~/Downloads` directory.
+The script will download the fonts required for the Powerlevel10k theme.
 
-You will need to install them manually and set them up in your terminal.
+You will need to set them up in your terminal manually.
 
-### 3.3. Application
+### 3.3. Applications
 
-```bash
-brew install --cask visual-studio-code orbstack
-```
+| Install | note. |
+| :-: | :- |
+| Orbstack | |
+| Visual Studio Code | |
 
-Orbstack can use a [Chinese mirror](https://dockerproxy.com).
+## 4. MacOS Server
+
+### 4.1. Terminals
+
+| Install | note. |
+| :-: | :- |
+| HomeBrew | Use Tsinghua Mirror. |
+
+### 4.2. Applications
+
+| Install | note. |
+| :-: | :- |
+| UTM | |
+| Home Assistant | TODO: Install manually. |
+| Immortal Wrt | TODO: Install manually. |
