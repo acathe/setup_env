@@ -51,7 +51,7 @@ terminals::homebrew::upgrade() {
 }
 
 terminals::homebrew::setup() {
-    terminals::omz::install
-    terminals::omz::set_env
-    terminals::omz::upgrade
+    terminals::homebrew::install
+    terminals::homebrew::set_env
+    terminals::homebrew::upgrade
 }
