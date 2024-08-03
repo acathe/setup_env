@@ -7,9 +7,11 @@ source "./macos/option.sh"
 # shellcheck source-path=..
 source "./macos/terminals/homebrew.sh"
 # shellcheck source-path=..
-source "./macos/terminals/git.sh"
-# shellcheck source-path=..
 source "./macos/terminals/omz.sh"
+# shellcheck source-path=..
+source "./macos/applications/orbstack.sh"
+# shellcheck source-path=..
+source "./macos/applications/vscode.sh"
 
 main() {
     # install git.
@@ -20,12 +22,16 @@ main() {
         terminals::homebrew::setup
     fi
 
-    if ((SETUP_TERMINALS_GIT != 0)); then
-        terminals::git::setup
-    fi
-
     if ((SETUP_TERMINALS_OMZ != 0)); then
         terminals::omz::setup
+    fi
+
+    if ((INSTALL_APPLICATIONS_ORBSTACK != 0)); then
+        applications::orbstack::install
+    fi
+
+    if ((INSTALL_APPLICATIONS_VSCODE != 0)); then
+        applications::vscode::install
     fi
 
     return 0
