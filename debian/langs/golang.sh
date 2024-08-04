@@ -61,8 +61,8 @@ langs::golang::set_env() {
 
     tee -a "${HOME}/.zshenv" <<EOF >/dev/null
 # Golang
-export PATH="/usr/local/go/bin:\${PATH}"
-export PATH="\$(go env GOPATH)/bin:\${PATH}"
+export PATH="/usr/local/go/bin:\$PATH"
+export PATH="\$(go env GOPATH)/bin:\$PATH"
 EOF
 
     utils::append_omz_plugins golang
