@@ -23,18 +23,10 @@
 GIT_USER_NAME=${your_name} GIT_USER_EMAIL=${your_email} bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/master/debian.sh")"
 ```
 
-```bash
-ENABLE_CHINA_MIRROR=1 GIT_USER_NAME=${your_name} GIT_USER_EMAIL=${your_email} bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/master/debian.sh")"
-```
-
 ### 1.2. MacOS
 
 ```bash
 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/master/macos.sh")"
-```
-
-```bash
-ENABLE_CHINA_MIRROR=1 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/master/macos.sh")"
 ```
 
 ### 1.3. MacOS Server
@@ -43,38 +35,35 @@ ENABLE_CHINA_MIRROR=1 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/a
 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/master/macos_server.sh")"
 ```
 
-```bash
-ENABLE_CHINA_MIRROR=1 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/master/macos_server.sh")"
-```
-
 ## 2. Debian
 
 ### 2.1. Terminals
 
-| Install | note. |
-| :-: | :- |
-| APT | Use Tsinghua Mirror. |
-| Git | |
-| Zsh | |
-| Oh-My-Zsh | Use Tsinghua Mirror. |
+| Option | Installer |
+| :-: | :-: |
+| DISABLE_TERMINALS_GIT | Git |
+| GIT_USER_NAME | ⬆️ |
+| GIT_USER_EMAIL | ⬆️ |
+| DISABLE_TERMINALS_ZSH | Zsh |
+| DISABLE_TERMINALS_OMZ | Oh-My-Zsh |
 
 ### 2.2. Langs
 
-| Install | note. |
-| :-: | :- |
-| C++ | |
-| Golang | Default **disable**. |
-| Rust | Use Tsinghua Mirror. |
-| Python | Use Tsinghua Mirror. |
+| Option | Installer |
+| :-: | :-: |
+| DISABLE_LANGS_CPP | C++ |
+| DISABLE_LANGS_GOLANG | Golang |
+| DISABLE_LANGS_RUST | Rust |
+| DISABLE_LANGS_PYTHON | Python |
 
 ## 3. MacOS
 
 ### 3.1. Terminals
 
-| Install | note. |
-| :-: | :- |
-| HomeBrew | Use Tsinghua Mirror. |
-| Oh-My-Zsh | Use Tsinghua Mirror. |
+| |
+| :-: |
+| HomeBrew |
+| Oh-My-Zsh |
 
 ### 3.2. Powerlevel10k
 
@@ -86,23 +75,23 @@ You will need to set them up in your terminal manually.
 
 ### 3.3. Applications
 
-| Install | note. |
-| :-: | :- |
-| Orbstack | |
-| Visual Studio Code | |
-| ChatGPT | |
+| |
+| :-: |
+| Orbstack |
+| Visual Studio Code |
+| ChatGPT |
 
 ## 4. MacOS Server
 
 ### 4.1. Terminals
 
-| Install | note. |
-| :-: | :- |
-| HomeBrew | Use Tsinghua Mirror. |
+| |
+| :-: |
+| HomeBrew |
 
 ### 4.2. Applications
 
-| Install | note. |
+| | note. |
 | :-: | :- |
 | UTM | |
 | Home Assistant | TODO: Install manually. |

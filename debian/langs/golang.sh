@@ -2,8 +2,14 @@
 
 # shellcheck source-path=../..
 source "./debian/tools/tools.sh"
+# shellcheck source-path=../..
+source "./debian/utils/utils.sh"
 
 langs::golang::_get_package() {
+    if [ -z "$(command -v curl)" ] || [ -z "$(command -v jq)" ]; then
+        return 1
+    fi
+
     local go_version os_type arch
 
     go_version="$(
@@ -13,35 +19,30 @@ langs::golang::_get_package() {
 
     os_type="$(uname -s)"
 
-    arch="$(uname -m)"
-    case "${arch}" in
+    case "$(uname -m)" in
     "x86_64")
         arch="amd64"
         ;;
     "aarch64")
         arch="arm64"
         ;;
+    *)
+        return 1
+        ;;
     esac
 
     echo "${go_version}.${os_type,,}-${arch}.tar.gz"
 }
 
-langs::golang::_get_download() {
-    local golang_download="https://go.dev/dl"
-
-    if [ -n "$ENABLE_CHINA_MIRROR" ]; then
-        golang_download="https://golang.google.cn/dl"
+langs::golang::install() {
+    if [ -z "$(command -v curl)" ]; then
+        return 1
     fi
 
-    echo "${golang_download}"
-}
-
-langs::golang::install() {
-    local go_pkg golang_download
+    local go_pkg
     go_pkg="$(langs::golang::_get_package)"
-    go_download="$(langs::golang::_get_download)"
 
-    curl --proto '=https' --tlsv1.2 -sSfOL "${go_download}/${go_pkg}"
+    curl --proto '=https' --tlsv1.2 -sSfOL "https://go.dev/dl/${go_pkg}"
     sudo rm -rf "/usr/local/go"
     sudo tar -C "/usr/local" -xzf "./${go_pkg}"
     rm "./${go_pkg}"
@@ -50,34 +51,26 @@ langs::golang::install() {
 langs::golang::set_env() {
     export PATH="/usr/local/go/bin:${PATH}"
 
-    go env -w GO111MODULE="on"
-    go env -w GOPATH="${HOME}/Projects/golang"
+    local gopath="${HOME}/Projects/golang"
+    go env -w GOPATH="${gopath}"
+    export PATH="${gopath}/bin:${PATH}"
 
-    PATH="$(go env GOPATH)/bin:${PATH}"
-    export PATH
-
-    if [ -s "${HOME}/.zprofile" ]; then
-        echo >>"${HOME}/.zprofile"
+    if [ -s "${HOME}/.zshenv" ]; then
+        echo >>"${HOME}/.zshenv"
     fi
 
-    tee -a "${HOME}/.zprofile" <<EOF
+    tee -a "${HOME}/.zshenv" <<EOF
 # Golang
 export PATH="/usr/local/go/bin:\${PATH}"
 export PATH="\$(go env GOPATH)/bin:\${PATH}"
 EOF
 
-    if [ -n "$ENABLE_CHINA_MIRROR" ]; then
-        go env -w GOPROXY="https://proxy.golang.com.cn,https://proxy.golang.com,direct"
-        go env -w GOSUMDB="sum.golang.google.cn"
-    fi
-
-    sed -i '/^plugins=(/ s/)/ golang)/' "${HOME}/.zshrc"
+    utils::append_omz_plugins golang
 }
 
 langs::golang::setup() {
-    if [ -z "$(command -v jq)" ]; then
-        tools::install_jq
-    fi
+    tools::install_jq
+    tools::install_curl
 
     langs::golang::install
     langs::golang::set_env
