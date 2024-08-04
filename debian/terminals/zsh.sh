@@ -9,7 +9,10 @@ terminals::zsh::sync_profile() {
     fi
 
     if [ -f "/etc/profile" ]; then
-        echo | sudo tee -a "/etc/zsh/zshenv" >/dev/null
+        if [ -s "/etc/zsh/zshenv" ]; then
+            echo | sudo tee -a "/etc/zsh/zshenv" >/dev/null
+        fi
+
         sudo tee -a "/etc/zsh/zshenv" <<EOF >/dev/null
 # Sync /etc/profile
 if [[ \$- == *i* ]]; then
@@ -19,7 +22,10 @@ EOF
     fi
 
     if [ -f "${HOME}/.profile" ]; then
-        echo >>"${HOME}/.zshenv"
+        if [ -s "${HOME}/.zshenv" ]; then
+            echo >>"${HOME}/.zshenv"
+        fi
+
         tee -a "${HOME}/.zshenv" <<EOF >/dev/null
 # Sync \$HOME/.profile
 if [[ \$- == *i* ]]; then

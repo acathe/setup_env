@@ -5,7 +5,7 @@ tools::install_jq() {
         return
     fi
 
-    sudo apt-get install jq -y
+    sudo apt-get install jq -y -qq
 }
 
 tools::install_curl() {
@@ -13,7 +13,7 @@ tools::install_curl() {
         return
     fi
 
-    sudo apt-get install curl -y
+    sudo apt-get install curl -y -qq
 }
 
 tools::install_git() {
@@ -21,7 +21,7 @@ tools::install_git() {
         return
     fi
 
-    sudo apt-get install git -y
+    sudo apt-get install git -y -qq
 }
 
 tools::install_zsh() {
@@ -29,7 +29,7 @@ tools::install_zsh() {
         return
     fi
 
-    sudo apt-get install zsh -y
+    sudo apt-get install zsh -y -qq
 }
 
 tools::install_build_essential() {
@@ -37,7 +37,7 @@ tools::install_build_essential() {
         return
     fi
 
-    sudo apt-get install build-essential -y
+    sudo apt-get install build-essential -y -qq
 }
 
 tools::install_gdb() {
@@ -45,7 +45,7 @@ tools::install_gdb() {
         return
     fi
 
-    sudo apt-get install gdb -y
+    sudo apt-get install gdb -y -qq
 }
 
 tools::install_cmake() {
@@ -53,7 +53,7 @@ tools::install_cmake() {
         return
     fi
 
-    sudo apt-get install cmake -y
+    sudo apt-get install cmake -y -qq
 }
 
 tools::install_python() {
@@ -61,5 +61,5 @@ tools::install_python() {
         return
     fi
 
-    sudo apt-get install python3 -y
+    sudo apt-get install python3 -y -qq
 }

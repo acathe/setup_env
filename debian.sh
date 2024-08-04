@@ -10,7 +10,7 @@ main() {
 
     if [ -z "$(command -v git)" ]; then
         sudo apt-get update
-        sudo apt-get install git -y
+        sudo apt-get install git -y -qq
     fi
 
     if [[ -z "${_BRANCH}" ]]; then
