@@ -5,7 +5,7 @@ source "./debian/tools/tools.sh"
 # shellcheck source-path=../..
 source "./debian/utils/utils.sh"
 
-langs::golang::_get_package() {
+debian::langs::golang::_get_package() {
     if [ -z "$(command -v curl)" ] || [ -z "$(command -v jq)" ]; then
         return 1
     fi
@@ -34,13 +34,13 @@ langs::golang::_get_package() {
     echo "${_go_version}.${_os_type,,}-${_arch}.tar.gz"
 }
 
-langs::golang::install() {
+debian::langs::golang::install() {
     if [ -z "$(command -v curl)" ]; then
         return 1
     fi
 
     local _go_pkg
-    _go_pkg="$(langs::golang::_get_package)"
+    _go_pkg="$(debian::langs::golang::_get_package)"
 
     curl --proto '=https' --tlsv1.2 -sSfOL "https://go.dev/dl/${_go_pkg}"
     sudo rm -rf "/usr/local/go"
@@ -48,7 +48,7 @@ langs::golang::install() {
     rm "./${_go_pkg}"
 }
 
-langs::golang::set_env() {
+debian::langs::golang::set_env() {
     export PATH="/usr/local/go/bin:${PATH}"
 
     local _gopath="${HOME}/Projects/golang"
@@ -65,13 +65,13 @@ export PATH="/usr/local/go/bin:\$PATH"
 export PATH="\$(go env GOPATH)/bin:\$PATH"
 EOF
 
-    utils::append_omz_plugins golang
+    debian::utils::append_omz_plugins golang
 }
 
-langs::golang::setup() {
-    tools::install_jq
-    tools::install_curl
+debian::langs::golang::setup() {
+    debian::tools::install_jq
+    debian::tools::install_curl
 
-    langs::golang::install
-    langs::golang::set_env
+    debian::langs::golang::install
+    debian::langs::golang::set_env
 }

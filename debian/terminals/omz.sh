@@ -5,7 +5,7 @@ source "./debian/tools/tools.sh"
 # shellcheck source-path=../..
 source "./debian/utils/utils.sh"
 
-terminals::omz::install() {
+debian::terminals::omz::install() {
     if [ -z "$(command -v git)" ] || [ -z "$(command -v curl)" ]; then
         return 1
     fi
@@ -23,7 +23,7 @@ terminals::omz::install() {
     fi
 }
 
-terminals::omz::remove_preshell() {
+debian::terminals::omz::remove_preshell() {
     if [ ! -f "${HOME}/.shell.pre-oh-my-zsh" ]; then
         return
     fi
@@ -54,35 +54,35 @@ terminals::omz::remove_preshell() {
     fi
 }
 
-terminals::omz::install_plugins() {
+debian::terminals::omz::install_plugins() {
     if [ -z "$(command -v git)" ]; then
         return 1
     fi
 
-    utils::append_omz_plugins gitignore z vscode
+    debian::utils::append_omz_plugins "gitignore" "z" "vscode"
 
     # Ref. https://github.com/Pilaton/OhMyZsh-full-autoupdate?tab=readme-ov-file#installing
     git clone https://github.com/Pilaton/OhMyZsh-full-autoupdate.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/ohmyzsh-full-autoupdate"
-    utils::append_omz_plugins ohmyzsh-full-autoupdate
+    debian::utils::append_omz_plugins "ohmyzsh-full-autoupdate"
 
     # Ref. https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md#oh-my-zsh
     git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
-    utils::append_omz_plugins zsh-autosuggestions
+    debian::utils::append_omz_plugins "zsh-autosuggestions"
 
     # Ref. https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md/#Oh-my-zsh
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
-    utils::append_omz_plugins zsh-syntax-highlighting
+    debian::utils::append_omz_plugins "zsh-syntax-highlighting"
 
     # Ref. https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#oh-my-zsh
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/themes/powerlevel10k"
-    sed -i 's:^ZSH_THEME=".*":ZSH_THEME="powerlevel10k/powerlevel10k":' "${HOME}/.zshrc"
+    debian::utils::change_omz_theme "powerlevel10k/powerlevel10k"
 }
 
-terminals::omz::setup() {
-    tools::install_git
-    tools::install_curl
+debian::terminals::omz::setup() {
+    debian::tools::install_git
+    debian::tools::install_curl
 
-    terminals::omz::install
-    terminals::omz::install_plugins
-    terminals::omz::remove_preshell
+    debian::terminals::omz::install
+    debian::terminals::omz::install_plugins
+    debian::terminals::omz::remove_preshell
 }

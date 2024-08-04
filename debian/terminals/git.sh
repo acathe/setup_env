@@ -3,7 +3,7 @@
 # shellcheck source-path=../..
 source "./debian/tools/tools.sh"
 
-terminals::git::set_env() {
+debian::terminals::git::set_env() {
     if [ -z "$(command -v git)" ]; then
         return 1
     fi
@@ -19,8 +19,8 @@ terminals::git::set_env() {
     git config --global core.editor "code --wait"
 }
 
-terminals::git::setup() {
-    tools::install_git
+debian::terminals::git::setup() {
+    debian::tools::install_git
 
-    terminals::git::set_env
+    debian::terminals::git::set_env
 }

@@ -3,13 +3,13 @@
 # shellcheck source-path=../..
 source "./debian/tools/tools.sh"
 
-langs::cpp::set_env() {
-    tools::install_gdb
-    tools::install_cmake
+debian::langs::cpp::set_env() {
+    debian::tools::install_gdb
+    debian::tools::install_cmake
 }
 
-langs::cpp::setup() {
-    tools::install_build_essential
+debian::langs::cpp::setup() {
+    debian::tools::install_build_essential
 
-    langs::cpp::set_env
+    debian::langs::cpp::set_env
 }

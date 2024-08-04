@@ -21,32 +21,32 @@ main() {
     sudo apt-get update
     sudo apt-get upgrade -y
 
-    if [[ -z "${DISABLE_TERMINALS_GIT}" ]]; then
-        terminals::git::setup
+    if [[ -z "${DISABLE_GIT}" ]]; then
+        debian::terminals::git::setup
     fi
 
-    if [[ -z "${DISABLE_TERMINALS_ZSH}" ]]; then
-        terminals::zsh::setup
+    if [[ -z "${DISABLE_ZSH}" ]]; then
+        debian::terminals::zsh::setup
     fi
 
-    if [[ -z "${DISABLE_TERMINALS_OMZ}" ]]; then
-        terminals::omz::setup
+    if [[ -z "${DISABLE_OMZ}" ]]; then
+        debian::terminals::omz::setup
     fi
 
-    if [[ -z "${DISABLE_LANGS_CPP}" ]]; then
-        langs::cpp::setup
+    if [[ -z "${DISABLE_CPP}" ]]; then
+        debian::langs::cpp::setup
     fi
 
-    if [[ -z "${DISABLE_LANGS_GOLANG}" ]]; then
-        langs::golang::setup
+    if [[ -z "${DISABLE_GOLANG}" ]]; then
+        debian::langs::golang::setup
     fi
 
-    if [[ -z "${DISABLE_LANGS_RUST}" ]]; then
-        langs::rust::setup
+    if [[ -z "${DISABLE_RUST}" ]]; then
+        debian::langs::rust::setup
     fi
 
-    if [[ -z "${DISABLE_LANGS_PYTHON}" ]]; then
-        langs::python::setup
+    if [[ -z "${DISABLE_PYTHON}" ]]; then
+        debian::langs::python::setup
     fi
 
     sudo apt-get autoremove -y
