@@ -11,7 +11,7 @@ macos::utils::change_omz_plugins() {
         return 1
     fi
 
-    sed -i "" "s/^plugins=(.*)/ plugins=(${_plugins_name})/" "${HOME}/.zshrc"
+    sed -i "" "s/^plugins=(.*)/plugins=(${_plugins_name})/" "${HOME}/.zshrc"
 }
 
 macos::utils::append_omz_plugins() {

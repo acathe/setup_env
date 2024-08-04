@@ -59,10 +59,10 @@ bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/master
 
 | Option | Applications |
 | :-: | :-: |
-| ENABLE_ORBSTACK | Orbstack |
-| ENABLE_VSCODE | Visual Studio Code |
-| ENABLE_CHATGPT | ChatGPT |
-| ENABLE_UTM | UTM |
+| **ENABLE**_ORBSTACK | Orbstack |
+| **ENABLE**_VSCODE | Visual Studio Code |
+| **ENABLE**_CHATGPT | ChatGPT |
+| **ENABLE**_UTM | UTM |
 
 ### 3.3. Powerlevel10k
 
