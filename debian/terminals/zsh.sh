@@ -9,7 +9,7 @@ terminals::zsh::sync_profile() {
     fi
 
     if [ -f "/etc/profile" ]; then
-        echo | tee -a "/etc/zsh/zshenv" >/dev/null
+        echo | sudo tee -a "/etc/zsh/zshenv" >/dev/null
         sudo tee -a "/etc/zsh/zshenv" <<EOF >/dev/null
 # Sync /etc/profile
 if [[ \$- == *i* ]]; then
