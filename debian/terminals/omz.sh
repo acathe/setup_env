@@ -28,12 +28,12 @@ terminals::omz::remove_preshell() {
         return
     fi
 
-    local preshell
-    preshell="$(cat "${HOME}/.shell.pre-oh-my-zsh")"
+    local _preshell
+    _preshell="$(cat "${HOME}/.shell.pre-oh-my-zsh")"
     rm "${HOME}/.shell.pre-oh-my-zsh"
 
     # Just implemented in Bash.
-    if [[ "$(basename -- "${preshell}")" != "bash" ]]; then
+    if [[ "$(basename -- "${_preshell}")" != "bash" ]]; then
         return
     fi
 

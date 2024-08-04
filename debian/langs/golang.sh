@@ -10,28 +10,28 @@ langs::golang::_get_package() {
         return 1
     fi
 
-    local go_version os_type arch
+    local _go_version _os_type _arch
 
-    go_version="$(
+    _go_version="$(
         curl --proto '=https' --tlsv1.2 -sSfL https://go.dev/dl/?mode=json |
             jq -r '.[0].version'
     )"
 
-    os_type="$(uname -s)"
+    _os_type="$(uname -s)"
 
     case "$(uname -m)" in
     "x86_64")
-        arch="amd64"
+        _arch="amd64"
         ;;
     "aarch64")
-        arch="arm64"
+        _arch="arm64"
         ;;
     *)
         return 1
         ;;
     esac
 
-    echo "${go_version}.${os_type,,}-${arch}.tar.gz"
+    echo "${_go_version}.${_os_type,,}-${_arch}.tar.gz"
 }
 
 langs::golang::install() {
@@ -39,27 +39,27 @@ langs::golang::install() {
         return 1
     fi
 
-    local go_pkg
-    go_pkg="$(langs::golang::_get_package)"
+    local _go_pkg
+    _go_pkg="$(langs::golang::_get_package)"
 
-    curl --proto '=https' --tlsv1.2 -sSfOL "https://go.dev/dl/${go_pkg}"
+    curl --proto '=https' --tlsv1.2 -sSfOL "https://go.dev/dl/${_go_pkg}"
     sudo rm -rf "/usr/local/go"
-    sudo tar -C "/usr/local" -xzf "./${go_pkg}"
-    rm "./${go_pkg}"
+    sudo tar -C "/usr/local" -xzf "./${_go_pkg}"
+    rm "./${_go_pkg}"
 }
 
 langs::golang::set_env() {
     export PATH="/usr/local/go/bin:${PATH}"
 
-    local gopath="${HOME}/Projects/golang"
-    go env -w GOPATH="${gopath}"
-    export PATH="${gopath}/bin:${PATH}"
+    local _gopath="${HOME}/Projects/golang"
+    go env -w GOPATH="${_gopath}"
+    export PATH="${_gopath}/bin:${PATH}"
 
     if [ -s "${HOME}/.zshenv" ]; then
         echo >>"${HOME}/.zshenv"
     fi
 
-    tee -a "${HOME}/.zshenv" <<EOF
+    tee -a "${HOME}/.zshenv" <<EOF >/dev/null
 # Golang
 export PATH="/usr/local/go/bin:\${PATH}"
 export PATH="\$(go env GOPATH)/bin:\${PATH}"
