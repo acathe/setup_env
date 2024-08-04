@@ -3,7 +3,7 @@
 # shellcheck source-path=../..
 source "./debian/tools/tools.sh"
 
-terminals::zsh::sync_profile() {
+debian::terminals::zsh::sync_profile() {
     if [ -z "$(command -v zsh)" ]; then
         return 1
     fi
@@ -35,8 +35,8 @@ EOF
     fi
 }
 
-terminals::zsh::setup() {
-    tools::install_zsh
+debian::terminals::zsh::setup() {
+    debian::tools::install_zsh
 
-    terminals::zsh::sync_profile
+    debian::terminals::zsh::sync_profile
 }

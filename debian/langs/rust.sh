@@ -5,7 +5,7 @@ source "./debian/tools/tools.sh"
 # shellcheck source-path=../..
 source "./debian/utils/utils.sh"
 
-langs::rust::install() {
+debian::langs::rust::install() {
     if [ -z "$(command -v curl)" ]; then
         return 1
     fi
@@ -19,13 +19,13 @@ langs::rust::install() {
     curl --proto '=https' --tlsv1.2 -sSf "https://sh.rustup.rs" | sh -s -- -y
 }
 
-langs::rust::set_env() {
-    utils::append_omz_plugins rust
+debian::langs::rust::set_env() {
+    debian::utils::append_omz_plugins rust
 }
 
-langs::rust::setup() {
-    tools::install_curl
+debian::langs::rust::setup() {
+    debian::tools::install_curl
 
-    langs::rust::install
-    langs::rust::set_env
+    debian::langs::rust::install
+    debian::langs::rust::set_env
 }
