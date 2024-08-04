@@ -1,47 +1,31 @@
 #!/usr/bin/env bash
 
+# shellcheck source-path=../..
+source "./debian/tools/tools.sh"
+# shellcheck source-path=../..
+source "./debian/utils/utils.sh"
+
 langs::rust::install() {
-    if [ -n "${ENABLE_CHINA_MIRROR}" ]; then
-        # Ref. https://mirrors.tuna.tsinghua.edu.cn/help/rustup/
-        export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
-        export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
-
-        if [ -s "${HOME}/.zprofile" ]; then
-            echo >>"${HOME}/.zprofile"
-        fi
-
-        tee -a "${HOME}/.zprofile" <<EOF
-# Rust
-export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
-export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
-EOF
+    if [ -z "$(command -v curl)" ]; then
+        return 1
     fi
+
+    if [ -s "${HOME}/.zshenv" ]; then
+        echo >>"${HOME}/.zshenv"
+    fi
+
+    echo "# Rust" >>"${HOME}/.zshenv"
 
     curl --proto '=https' --tlsv1.2 -sSf "https://sh.rustup.rs" | sh -s -- -y
 }
 
 langs::rust::set_env() {
-    if [ -n "${ENABLE_CHINA_MIRROR}" ]; then
-        mkdir -p "${CARGO_HOME:-${HOME}/.cargo}"
-
-        if [ -s "${CARGO_HOME:-${HOME}/.cargo}/config.toml" ]; then
-            echo >>"${CARGO_HOME:-${HOME}/.cargo}/config.toml"
-        fi
-
-        # Ref. https://mirrors.tuna.tsinghua.edu.cn/help/crates.io-index/
-        tee -a "${CARGO_HOME:-${HOME}/.cargo}/config.toml" <<EOF
-[source.crates-io]
-replace-with = 'mirror'
-
-[source.mirror]
-registry = "sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"
-EOF
-    fi
-
-    sed -i '/^plugins=(/ s/)/ rust)/' "${HOME}/.zshrc"
+    utils::append_omz_plugins rust
 }
 
 langs::rust::setup() {
+    tools::install_curl
+
     langs::rust::install
     langs::rust::set_env
 }

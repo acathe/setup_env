@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 
-terminals::git::install() {
-    sudo apt-get install git -y
-}
+# shellcheck source-path=../..
+source "./debian/tools/tools.sh"
 
 terminals::git::set_env() {
+    if [ -z "$(command -v git)" ]; then
+        return 1
+    fi
+
     if [[ -n "${GIT_USER_NAME}" ]]; then
         git config --global user.name "${GIT_USER_NAME}"
     fi
@@ -17,9 +20,7 @@ terminals::git::set_env() {
 }
 
 terminals::git::setup() {
-    if [ -z "$(command -v git)" ]; then
-        terminals::git::install
-    fi
+    tools::install_git
 
     terminals::git::set_env
 }

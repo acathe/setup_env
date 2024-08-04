@@ -1,16 +1,15 @@
 #!/usr/bin/env bash
 
-utils::load_vars_from_file() {
-    local file="${1}"
-    local var="${2}"
+utils::append_omz_plugins() {
+    local _plugins_name="${*}"
 
-    if [ ! -f "${file}" ]; then
+    if [ ! -f "${HOME}/.zshrc" ]; then
         return 1
     fi
 
-    echo "$(
-        # shellcheck source=/dev/null
-        source "${file}"
-        echo "${!var}"
-    )"
+    if [[ "${_plugins_name}" == *"/"* ]]; then
+        return 1
+    fi
+
+    sed -i "/^plugins=(/ s/)/ ${_plugins_name})/" "${HOME}/.zshrc"
 }

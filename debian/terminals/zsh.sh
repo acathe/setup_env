@@ -1,63 +1,42 @@
 #!/usr/bin/env bash
 
-terminals::zsh::install() {
-    sudo apt-get install zsh -y
-}
+# shellcheck source-path=../..
+source "./debian/tools/tools.sh"
 
-terminals::zsh::_sync_from_bash() {
-    local bash_config="${1}"
-    local zsh_config="${2}"
-
-    if [ ! -f "${bash_config}" ]; then
-        return
+terminals::zsh::sync_profile() {
+    if [ -z "$(command -v zsh)" ]; then
+        return 1
     fi
 
-    if [[ "${bash_config}" =~ ^"${HOME}"/ ]]; then
-        bash_config="${bash_config/"${HOME}"/"\${HOME}"}"
-    fi
+    if [ -f "/etc/profile" ]; then
+        if [ -s "/etc/zsh/zshenv" ]; then
+            echo | sudo tee -a "/etc/zsh/zshenv" >/dev/null
+        fi
 
-    tee "${HOME}/.tmp.zsh" <<EOF
-# Description: Sync from Bash.
-# Zsh does not have the \`shopt\` command.
-# This script defines an empty function to ensure compatibility with Zsh.
-shopt() {}
-source ${bash_config}
-unset -f shopt
+        sudo tee -a "/etc/zsh/zshenv" <<EOF >/dev/null
+# Sync /etc/profile
+if [[ \$- == *i* ]]; then
+    . /etc/profile
+fi
 EOF
-
-    if [ -f "${zsh_config}" ]; then
-        echo >>"${HOME}/.tmp.zsh"
-        cat "${zsh_config}" >>"${HOME}/.tmp.zsh"
     fi
 
-    sudo mv "${HOME}/.tmp.zsh" "${zsh_config}"
-}
+    if [ -f "${HOME}/.profile" ]; then
+        if [ -s "${HOME}/.zshenv" ]; then
+            echo >>"${HOME}/.zshenv"
+        fi
 
-terminals::zsh::sync_from_bash() {
-    # bash profile
-    terminals::zsh::_sync_from_bash "/etc/profile" "/etc/zsh/zprofile"
-    if [ -f "${HOME}/.bash_profile" ]; then
-        terminals::zsh::_sync_from_bash "${HOME}/.bash_profile" "${HOME}/.zprofile"
-    elif [ -f "${HOME}/.bash_login" ]; then
-        terminals::zsh::_sync_from_bash "${HOME}/.bash_login" "${HOME}/.zprofile"
-    else
-        terminals::zsh::_sync_from_bash "${HOME}/.profile" "${HOME}/.zprofile"
+        tee -a "${HOME}/.zshenv" <<EOF >/dev/null
+# Sync \$HOME/.profile
+if [[ \$- == *i* ]]; then
+    . \$HOME/.profile
+fi
+EOF
     fi
-
-    # bashrc
-    terminals::zsh::_sync_from_bash "/etc/bash.bashrc" "/etc/zsh/zshrc"
-    terminals::zsh::_sync_from_bash "${HOME}/.bashrc" "${HOME}/.zshrc"
-
-    # bash logout
-    terminals::zsh::_sync_from_bash "${HOME}/.bash_logout" "${HOME}/.zlogout"
 }
 
 terminals::zsh::setup() {
-    if [ -z "$(command -v zsh)" ]; then
-        terminals::zsh::install
-    fi
+    tools::install_zsh
 
-    if [[ "$(basename -- "${SHELL}")" == "bash" ]]; then
-        terminals::zsh::sync_from_bash
-    fi
+    terminals::zsh::sync_profile
 }

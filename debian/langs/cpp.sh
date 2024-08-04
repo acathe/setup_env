@@ -1,27 +1,15 @@
 #!/usr/bin/env bash
 
-langs::cpp::install() {
-    sudo apt-get install build-essential -y
-}
+# shellcheck source-path=../..
+source "./debian/tools/tools.sh"
 
-langs::cpp::install_gdb() {
-    sudo apt-get install gdb -y
-}
-
-langs::cpp::install_cmake() {
-    sudo apt-get install cmake -y
+langs::cpp::set_env() {
+    tools::install_gdb
+    tools::install_cmake
 }
 
 langs::cpp::setup() {
-    if [ -z "$(command -v g++)" ]; then
-        langs::cpp::install
-    fi
+    tools::install_build_essential
 
-    if [ -z "$(command -v gdb)" ]; then
-        langs::cpp::install_gdb
-    fi
-
-    if [ -z "$(command -v cmake)" ]; then
-        langs::cpp::install_cmake
-    fi
+    langs::cpp::set_env
 }

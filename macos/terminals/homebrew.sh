@@ -18,7 +18,7 @@ terminals::homebrew::set_env() {
 
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
-    tee -a "${HOME}/.zprofile" <<EOF
+    tee -a "${HOME}/.zprofile" <<EOF >/dev/null
 # Homebrew
 eval "\$(/opt/homebrew/bin/brew shellenv)"
 EOF
@@ -34,7 +34,7 @@ EOF
         # Ref. https://mirrors.tuna.tsinghua.edu.cn/help/homebrew-bottles/#%E9%95%BF%E6%9C%9F%E6%9B%BF%E6%8D%A2
         export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
 
-        tee -a "${HOME}/.zprofile" <<EOF
+        tee -a "${HOME}/.zprofile" <<EOF >/dev/null
 export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
 export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
 export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
