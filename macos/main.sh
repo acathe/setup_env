@@ -14,28 +14,28 @@ main() {
     # Ref. https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git
     git -v
 
-    if ((SETUP_TERMINALS_HOMEBREW != 0)); then
-        terminals::homebrew::setup
+    if [[ -z "${DISABLE_HOMEBREW}" ]]; then
+        macos::terminals::homebrew::setup
     fi
 
-    if ((SETUP_TERMINALS_OMZ != 0)); then
-        terminals::omz::setup
+    if [[ -z "${DISABLE_OMZ}" ]]; then
+        macos::terminals::omz::setup
     fi
 
-    if ((INSTALL_APPLICATIONS_ORBSTACK != 0)); then
-        applications::install_orbstack
+    if [[ -n "${ENABLE_ORBSTACK}" ]]; then
+        macos::applications::install_orbstack
     fi
 
-    if ((INSTALL_APPLICATIONS_VSCODE != 0)); then
-        applications::install_vscode
+    if [[ -n "${ENABLE_VSCODE}" ]]; then
+        macos::applications::install_vscode
     fi
 
-    if ((INSTALL_APPLICATIONS_CHATGPT != 0)); then
-        applications::install_chatgpt
+    if [[ -n "${ENABLE_CHATGPT}" ]]; then
+        macos::applications::install_chatgpt
     fi
 
-    if ((INSTALL_APPLICATIONS_UTM != 0)); then
-        applications::install_utm
+    if [[ -n "${ENABLE_UTM}" ]]; then
+        macos::applications::install_utm
     fi
 
     return 0
