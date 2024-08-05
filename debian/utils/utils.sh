@@ -14,7 +14,7 @@ debian::utils::sync_profile() {
         _pre="${_pre/"${HOME}"/"\$HOME"}"
     fi
 
-    tee "/tmp/.profile.sync" <<EOF
+    tee "/tmp/.profile.sync" <<EOF >/dev/null
 # Sync ${_pre}.
 . ${_pre}
 EOF
