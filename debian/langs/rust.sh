@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # shellcheck source-path=../..
 source "./debian/tools/tools.sh"
 # shellcheck source-path=../..
@@ -10,13 +12,17 @@ debian::langs::rust::install() {
         return 1
     fi
 
-    if [ -s "${HOME}/.zshenv" ]; then
-        echo >>"${HOME}/.zshenv"
+    if [ -s "${HOME}/.profile" ]; then
+        echo >>"${HOME}/.profile"
     fi
 
-    echo "# Rust" >>"${HOME}/.zshenv"
+    echo "# Rust" >>"${HOME}/.profile"
 
     curl --proto '=https' --tlsv1.2 -sSf "https://sh.rustup.rs" | sh -s -- -y
+
+    if [ -f "${HOME}/.zshenv" ] && [[ "$(cat "${HOME}/.zshenv")" == ". \"\$HOME/.cargo/env\"" ]]; then
+        rm "${HOME}/.zshenv"
+    fi
 }
 
 debian::langs::rust::set_env() {
