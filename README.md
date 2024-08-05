@@ -41,10 +41,10 @@ bash -c "$(curl -fsSL "https://raw.githubusercontent.com/acathe/setup_env/master
 
 | Option | Langs |
 | :-: | :-: |
-| DISABLE_CPP | C++ |
-| DISABLE_GOLANG | Golang |
-| DISABLE_RUST | Rust |
-| DISABLE_PYTHON | Python |
+| **ENABLE**_CPP | C++ |
+| **ENABLE**_GOLANG | Golang |
+| **ENABLE**_RUST | Rust |
+| **ENABLE**_PYTHON | Python |
 
 ## 3. MacOS
 
