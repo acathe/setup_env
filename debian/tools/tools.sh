@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 debian::tools::install_jq() {
     if [ -n "$(command -v jq)" ]; then
         return
