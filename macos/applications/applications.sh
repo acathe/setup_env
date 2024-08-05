@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 macos::applications::install_orbstack() {
     brew install --cask orbstack
 }

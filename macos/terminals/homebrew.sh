@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-#
-# Respects the following environment variables:
-# - ENABLE_CHINA_MIRROR
-#
 
 set -e
 

@@ -1,5 +1,36 @@
 #!/usr/bin/env bash
 
+set -e
+
+debian::utils::sync_profile() {
+    local _pre="${1}"
+    local _cur="${2}"
+
+    if [ ! -f "${_pre}" ]; then
+        return
+    fi
+
+    if [[ "${_pre}" =~ ^"${HOME}"/ ]]; then
+        _pre="${_pre/"${HOME}"/"\$HOME"}"
+    fi
+
+    tee "/tmp/.profile.sync" <<EOF >/dev/null
+# Sync ${_pre}.
+. ${_pre}
+EOF
+
+    if [ -s "${_cur}" ]; then
+        echo >>"/tmp/.profile.sync"
+        cat "${_cur}" >>"/tmp/.profile.sync"
+    fi
+
+    if [ -w "$(dirname -- "${_cur}")" ]; then
+        mv "/tmp/.profile.sync" "${_cur}"
+    else
+        sudo mv "/tmp/.profile.sync" "${_cur}"
+    fi
+}
+
 debian::utils::append_omz_plugins() {
     local _plugins_name="${*}"
 

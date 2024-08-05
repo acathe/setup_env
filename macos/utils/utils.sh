@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 macos::utils::change_omz_plugins() {
     local _plugins_name="${*}"
 

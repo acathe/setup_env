@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # shellcheck source-path=../..
 source "./debian/tools/tools.sh"
 # shellcheck source-path=../..
@@ -55,11 +57,11 @@ debian::langs::golang::set_env() {
     go env -w GOPATH="${_gopath}"
     export PATH="${_gopath}/bin:${PATH}"
 
-    if [ -s "${HOME}/.zshenv" ]; then
-        echo >>"${HOME}/.zshenv"
+    if [ -s "${HOME}/.profile" ]; then
+        echo >>"${HOME}/.profile"
     fi
 
-    tee -a "${HOME}/.zshenv" <<EOF >/dev/null
+    tee -a "${HOME}/.profile" <<EOF >/dev/null
 # Golang
 export PATH="/usr/local/go/bin:\$PATH"
 export PATH="\$(go env GOPATH)/bin:\$PATH"

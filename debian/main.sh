@@ -33,19 +33,19 @@ main() {
         debian::terminals::omz::setup
     fi
 
-    if [[ -z "${DISABLE_CPP}" ]]; then
+    if [[ -n "${ENABLE_CPP}" ]]; then
         debian::langs::cpp::setup
     fi
 
-    if [[ -z "${DISABLE_GOLANG}" ]]; then
+    if [[ -n "${ENABLE_GOLANG}" ]]; then
         debian::langs::golang::setup
     fi
 
-    if [[ -z "${DISABLE_RUST}" ]]; then
+    if [[ -n "${ENABLE_RUST}" ]]; then
         debian::langs::rust::setup
     fi
 
-    if [[ -z "${DISABLE_PYTHON}" ]]; then
+    if [[ -n "${ENABLE_PYTHON}" ]]; then
         debian::langs::python::setup
     fi
 

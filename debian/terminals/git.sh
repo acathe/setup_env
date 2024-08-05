@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # shellcheck source-path=../..
 source "./debian/tools/tools.sh"
 
