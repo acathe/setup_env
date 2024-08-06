@@ -3,8 +3,7 @@
 set -e
 
 debian::utils::sync_profile() {
-    local _pre="${1}"
-    local _cur="${2}"
+    local _pre="${1}" _cur="${2}"
 
     if [ ! -f "${_pre}" ]; then
         return
@@ -14,7 +13,7 @@ debian::utils::sync_profile() {
         _pre="${_pre/"${HOME}"/"\$HOME"}"
     fi
 
-    tee "/tmp/.profile.sync" <<EOF >/dev/null
+    tee "/tmp/.profile.sync" <<EOF >"/dev/null"
 # Sync ${_pre}.
 . ${_pre}
 EOF
@@ -42,7 +41,7 @@ debian::utils::append_omz_plugins() {
         return 1
     fi
 
-    sed -i "/^plugins=(/ s/)/ ${_plugins_name})/" "${HOME}/.zshrc"
+    sed -i "/^plugins=(/s/)/ ${_plugins_name})/" "${HOME}/.zshrc"
 }
 
 debian::utils::change_omz_theme() {

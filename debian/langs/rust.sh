@@ -18,7 +18,7 @@ debian::langs::rust::install() {
 
     echo "# Rust" >>"${HOME}/.profile"
 
-    curl --proto '=https' --tlsv1.2 -sSf "https://sh.rustup.rs" | sh -s -- -y
+    curl --proto "=https" --tlsv1.2 -sSf "https://sh.rustup.rs" | sh -s -- -y
 
     if [ -f "${HOME}/.zshenv" ] && [[ "$(cat "${HOME}/.zshenv")" == ". \"\$HOME/.cargo/env\"" ]]; then
         rm "${HOME}/.zshenv"
@@ -26,7 +26,7 @@ debian::langs::rust::install() {
 }
 
 debian::langs::rust::set_env() {
-    debian::utils::append_omz_plugins rust
+    debian::utils::append_omz_plugins "rust"
 }
 
 debian::langs::rust::setup() {

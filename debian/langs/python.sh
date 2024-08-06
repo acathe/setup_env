@@ -11,7 +11,7 @@ debian::langs::python::set_env() {
     sudo apt-get install python3-pip -y -qq
     sudo apt-get install python3-venv -y -qq
 
-    debian::utils::append_omz_plugins python
+    debian::utils::append_omz_plugins "python"
 }
 
 debian::langs::python::setup() {
