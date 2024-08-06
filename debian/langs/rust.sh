@@ -29,7 +29,7 @@ debian::langs::rust::set_env() {
     debian::utils::append_omz_plugins "rust"
 }
 
-debian::langs::rust::setup() {
+debian::langs::rust() {
     debian::tools::install_curl
 
     debian::langs::rust::install

@@ -21,7 +21,7 @@ debian::terminals::git::set_env() {
     git config --global core.editor "code --wait"
 }
 
-debian::terminals::git::setup() {
+debian::terminals::git() {
     debian::tools::install_git
 
     debian::terminals::git::set_env

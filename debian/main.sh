@@ -22,31 +22,31 @@ main() {
     sudo apt-get upgrade -y
 
     if [[ -z "${DISABLE_GIT}" ]]; then
-        debian::terminals::git::setup
+        debian::terminals::git
     fi
 
     if [[ -z "${DISABLE_ZSH}" ]]; then
-        debian::terminals::zsh::setup
+        debian::terminals::zsh
     fi
 
     if [[ -z "${DISABLE_OMZ}" ]]; then
-        debian::terminals::omz::setup
+        debian::terminals::omz
     fi
 
     if [[ -n "${ENABLE_CPP}" ]]; then
-        debian::langs::cpp::setup
+        debian::langs::cpp
     fi
 
     if [[ -n "${ENABLE_GOLANG}" ]]; then
-        debian::langs::golang::setup
+        debian::langs::golang
     fi
 
     if [[ -n "${ENABLE_RUST}" ]]; then
-        debian::langs::rust::setup
+        debian::langs::rust
     fi
 
     if [[ -n "${ENABLE_PYTHON}" ]]; then
-        debian::langs::python::setup
+        debian::langs::python
     fi
 
     sudo apt-get autoremove -y

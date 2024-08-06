@@ -10,7 +10,7 @@ debian::langs::cpp::set_env() {
     debian::tools::install_cmake
 }
 
-debian::langs::cpp::setup() {
+debian::langs::cpp() {
     debian::tools::install_build_essential
 
     debian::langs::cpp::set_env

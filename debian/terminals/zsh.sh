@@ -16,7 +16,7 @@ debian::terminals::zsh::sync_profile() {
     debian::utils::sync_profile "${HOME}/.profile" "${HOME}/.zprofile"
 }
 
-debian::terminals::zsh::setup() {
+debian::terminals::zsh() {
     debian::tools::install_zsh
 
     debian::terminals::zsh::sync_profile

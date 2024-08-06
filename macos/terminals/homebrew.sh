@@ -29,7 +29,7 @@ macos::terminals::homebrew::upgrade() {
     brew upgrade
 }
 
-macos::terminals::homebrew::setup() {
+macos::terminals::homebrew() {
     macos::terminals::homebrew::install
     macos::terminals::homebrew::set_env
     macos::terminals::homebrew::upgrade

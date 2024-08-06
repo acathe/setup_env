@@ -80,7 +80,7 @@ debian::terminals::omz::install_plugins() {
     debian::utils::change_omz_theme "powerlevel10k/powerlevel10k"
 }
 
-debian::terminals::omz::setup() {
+debian::terminals::omz() {
     debian::tools::install_git
     debian::tools::install_curl
 

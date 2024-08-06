@@ -70,7 +70,7 @@ EOF
     debian::utils::append_omz_plugins "golang"
 }
 
-debian::langs::golang::setup() {
+debian::langs::golang() {
     debian::tools::install_jq
     debian::tools::install_curl
 

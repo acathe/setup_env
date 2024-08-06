@@ -44,7 +44,7 @@ macos::terminals::omz::install_plugins() {
     brew install --cask font-meslo-for-powerlevel10k
 }
 
-macos::terminals::omz::setup() {
+macos::terminals::omz() {
     macos::terminals::omz::install
     macos::terminals::omz::install_plugins
 }
