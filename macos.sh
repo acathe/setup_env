@@ -14,7 +14,7 @@ main() {
         _BRANCH="master"
     fi
 
-    git clone --depth 1 --branch "${_BRANCH}" https://github.com/acathe/setup_env.git ./.setup_env
+    git clone --depth 1 --branch "${_BRANCH}" "https://github.com/acathe/setup_env.git" "./.setup_env"
 
     cd "./.setup_env"
     bash "./macos/main.sh"

@@ -12,11 +12,11 @@ debian::terminals::zsh::sync_profile() {
         return 1
     fi
 
-    debian::utils::sync_profile "/etc/profile" /etc/zsh/zprofile
+    debian::utils::sync_profile "/etc/profile" "/etc/zsh/zprofile"
     debian::utils::sync_profile "${HOME}/.profile" "${HOME}/.zprofile"
 }
 
-debian::terminals::zsh::setup() {
+debian::terminals::zsh() {
     debian::tools::install_zsh
 
     debian::terminals::zsh::sync_profile

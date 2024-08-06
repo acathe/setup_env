@@ -18,7 +18,7 @@ macos::terminals::homebrew::set_env() {
         echo >>"${HOME}/.zprofile"
     fi
 
-    tee -a "${HOME}/.zprofile" <<EOF >/dev/null
+    tee -a "${HOME}/.zprofile" <<EOF >"/dev/null"
 # Homebrew
 eval "\$(/opt/homebrew/bin/brew shellenv)"
 EOF
@@ -29,7 +29,7 @@ macos::terminals::homebrew::upgrade() {
     brew upgrade
 }
 
-macos::terminals::homebrew::setup() {
+macos::terminals::homebrew() {
     macos::terminals::homebrew::install
     macos::terminals::homebrew::set_env
     macos::terminals::homebrew::upgrade

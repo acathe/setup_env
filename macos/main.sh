@@ -15,11 +15,11 @@ main() {
     git -v
 
     if [[ -z "${DISABLE_HOMEBREW}" ]]; then
-        macos::terminals::homebrew::setup
+        macos::terminals::homebrew
     fi
 
     if [[ -z "${DISABLE_OMZ}" ]]; then
-        macos::terminals::omz::setup
+        macos::terminals::omz
     fi
 
     if [[ -n "${ENABLE_ORBSTACK}" ]]; then
