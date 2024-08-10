@@ -12,6 +12,10 @@ macos::terminals::homebrew::install() {
 }
 
 macos::terminals::homebrew::set_env() {
+    if [ ! -d "/opt/homebrew" ]; then
+        return
+    fi
+
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
     if [ -s "${HOME}/.zprofile" ]; then
