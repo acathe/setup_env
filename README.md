@@ -109,6 +109,8 @@ You will need to set them up in your terminal manually.
 |                       [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)                        |
 |                  [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat)                   |
 |          [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)          |
+|            [Better Comments Next](https://marketplace.visualstudio.com/items?itemName=EdwinHuiSH.better-comments-next)            |
+|            [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense)            |
 
 #### 3.4.2. C/C++
 
@@ -160,6 +162,8 @@ You will need to set them up in your terminal manually.
 |                 [Python Debugger](https://marketplace.visualstudio.com/items?itemName=ms-python.debugpy)                  |
 | [Python Environment Manager](https://marketplace.visualstudio.com/items?itemName=donjayamanne.python-environment-manager) |
 |             [Black Formatter](https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter)              |
+| [autoDocstring - Python Docstring Generator](https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring) |
+|             [Python Snippets 3](https://marketplace.visualstudio.com/items?itemName=EricSia.pythonsnippets3)              |
 
 #### 3.4.8. Other
 
