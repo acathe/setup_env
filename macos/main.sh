@@ -10,9 +10,9 @@ source "./macos/terminals/omz.sh"
 source "./macos/applications/applications.sh"
 
 main() {
-    # install git.
-    # Ref. https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git
-    git -v
+    if [ ! -d "/Library/Developer/CommandLineTools" ]; then
+        xcode-select --install
+    fi
 
     if [[ -z "${DISABLE_HOMEBREW}" ]]; then
         macos::terminals::homebrew

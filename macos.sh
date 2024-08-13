@@ -8,7 +8,9 @@ main() {
         return 1
     fi
 
-    git -v
+    if [ ! -d "/Library/Developer/CommandLineTools" ]; then
+        xcode-select --install
+    fi
 
     if [[ -z "${_BRANCH}" ]]; then
         _BRANCH="master"
