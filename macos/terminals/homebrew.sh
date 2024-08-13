@@ -3,6 +3,10 @@
 set -e
 
 macos::terminals::homebrew::install() {
+    if [ -n "$(command -v brew)" ]; then
+        return
+    fi
+
     if [ -z "$(command -v curl)" ]; then
         return 1
     fi
