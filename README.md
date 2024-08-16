@@ -110,6 +110,7 @@ You will need to set them up in your terminal manually.
 |                  [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat)                   |
 |          [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)          |
 |            [Better Comments Next](https://marketplace.visualstudio.com/items?itemName=EdwinHuiSH.better-comments-next)            |
+|                      [change-case](https://marketplace.visualstudio.com/items?itemName=wmaurer.change-case)                       |
 |            [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense)            |
 
 #### 3.4.2. C/C++
