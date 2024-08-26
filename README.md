@@ -19,6 +19,7 @@
     - [3.4.6. Markdown](#346-markdown)
     - [3.4.7. Python](#347-python)
     - [3.4.8. Other](#348-other)
+- [4. TODO](#4-todo)
 
 ## 1. Quick Start
 
@@ -144,7 +145,6 @@ You will need to set them up in your terminal manually.
 |                                                    Plugins                                                    |
 | :-----------------------------------------------------------------------------------------------------------: |
 |       [GitLens — Git supercharged](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)       |
-|              [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)              |
 | [GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github) |
 
 #### 3.4.6. Markdown
@@ -172,3 +172,8 @@ You will need to set them up in your terminal manually.
 |                                    Plugins                                     |
 | :----------------------------------------------------------------------------: |
 | [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) |
+
+## 4. TODO
+
+- [ ] Support retry on failure, not restart.
+- [ ] Support syncing VSCode settings.
