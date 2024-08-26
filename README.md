@@ -112,6 +112,7 @@ You will need to set them up in your terminal manually.
 |            [Better Comments Next](https://marketplace.visualstudio.com/items?itemName=EdwinHuiSH.better-comments-next)            |
 |                      [change-case](https://marketplace.visualstudio.com/items?itemName=wmaurer.change-case)                       |
 |            [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense)            |
+|               [Ligatures Limited](https://marketplace.visualstudio.com/items?itemName=kshetline.ligatures-limited)                |
 
 #### 3.4.2. C/C++
 
