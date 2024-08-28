@@ -33,6 +33,8 @@ main() {
         debian::terminals::omz
     fi
 
+    debian::tools::install_build_essential
+
     if [[ -n "${ENABLE_CPP}" ]]; then
         debian::langs::cpp
     fi
