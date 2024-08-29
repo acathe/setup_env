@@ -23,7 +23,6 @@
 |            [Better Comments Next](https://marketplace.visualstudio.com/items?itemName=EdwinHuiSH.better-comments-next)            |
 |               [Ligatures Limited](https://marketplace.visualstudio.com/items?itemName=kshetline.ligatures-limited)                |
 |            [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense)            |
-|                      [change-case](https://marketplace.visualstudio.com/items?itemName=wmaurer.change-case)                       |
 
 ## 2. Git/Github
 
