@@ -85,9 +85,11 @@ You can use the `ENABLE` parameter to install them.
 
 Restart the terminal to configure Powerlevel10k.
 
-The script will download the fonts required for the Powerlevel10k theme.
+The script will download the fonts required for the Powerlevel10k theme. You will need to set them up in your terminal manually.
 
-You will need to set them up in your terminal manually.
+1. Set the "Terminal Theme" to `Pro`.
+2. Configure the font for the "Terminal Pro Theme" as `MesloLGS NF` with a font size of `13`.
+3. Set the "Terminal Pro Theme" shell to `close when the shell exits completely`.
 
 ## 4. TODO
 
