@@ -24,6 +24,9 @@
 |               [Ligatures Limited](https://marketplace.visualstudio.com/items?itemName=kshetline.ligatures-limited)                |
 |            [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense)            |
 |                      [Todo Tree](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree)                       |
+|                      [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens)                       |
+|               [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)                |
+|                  [One Dark Pro](https://marketplace.visualstudio.com/items?itemName=zhuangtongfa.Material-theme)                  |
 
 ## 2. Git/Github
 
