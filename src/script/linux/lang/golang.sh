@@ -2,23 +2,27 @@
 
 set -e
 
-# shellcheck source-path=../..
-source "./debian/tools/tools.sh"
-# shellcheck source-path=../..
-source "./debian/utils/utils.sh"
+if [[ -n "${_SETUP_ENV_DEBIAN_LANG_GOLANG_SH}" ]]; then
+    return 0
+else
+    _SETUP_ENV_DEBIAN_LANG_GOLANG_SH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    readonly _SETUP_ENV_DEBIAN_LANG_GOLANG_SH
+    cd "${_SETUP_ENV_DEBIAN_LANG_GOLANG_SH}"
+fi
 
-debian::langs::golang::_get_package() {
-    if [ -z "$(command -v curl)" ] || [ -z "$(command -v jq)" ]; then
-        return 1
-    fi
+source "../util/apt.sh"
+source "../util/omz.sh"
 
-    local _go_version _os_type _arch
+lang::golang::_get_package() {
+    util::apt::install "curl" "jq"
 
+    local _go_version
     _go_version="$(
         curl --proto "=https" --tlsv1.2 -sSfL "https://go.dev/dl/?mode=json" |
             jq -r ".[0].version"
     )"
 
+    local _os_type _arch
     _os_type="$(uname -s)"
 
     case "$(uname -m)" in
@@ -36,13 +40,11 @@ debian::langs::golang::_get_package() {
     echo "${_go_version}.${_os_type,,}-${_arch}.tar.gz"
 }
 
-debian::langs::golang::install() {
-    if [ -z "$(command -v curl)" ]; then
-        return 1
-    fi
+lang::golang::install() {
+    util::apt::install "curl"
 
     local _go_pkg
-    _go_pkg="$(debian::langs::golang::_get_package)"
+    _go_pkg="$(lang::golang::_get_package)"
 
     curl --proto "=https" --tlsv1.2 -sSfOL "https://go.dev/dl/${_go_pkg}"
     sudo rm -rf "/usr/local/go"
@@ -50,7 +52,7 @@ debian::langs::golang::install() {
     rm "./${_go_pkg}"
 }
 
-debian::langs::golang::set_env() {
+lang::golang::set_env() {
     export PATH="/usr/local/go/bin:${PATH}"
 
     local _gopath="${HOME}/Projects/golang"
@@ -67,13 +69,10 @@ export PATH="/usr/local/go/bin:\$PATH"
 export PATH="\$(go env GOPATH)/bin:\$PATH"
 EOF
 
-    debian::utils::append_omz_plugins "golang"
+    util::omz::append_plugin "golang"
 }
 
-debian::langs::golang() {
-    debian::tools::install_jq
-    debian::tools::install_curl
-
-    debian::langs::golang::install
-    debian::langs::golang::set_env
+lang::golang() {
+    lang::golang::install
+    lang::golang::set_env
 }

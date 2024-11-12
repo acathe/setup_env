@@ -2,9 +2,17 @@
 
 set -e
 
-macos::terminals::homebrew::install() {
+if [[ -n "${_SETUP_ENV_MACOS_TERMINAL_HOMEBREW_SH}" ]]; then
+    return 0
+else
+    _SETUP_ENV_MACOS_TERMINAL_HOMEBREW_SH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    readonly _SETUP_ENV_MACOS_TERMINAL_HOMEBREW_SH
+    cd "${_SETUP_ENV_MACOS_TERMINAL_HOMEBREW_SH}"
+fi
+
+terminal::homebrew::install() {
     if [ -n "$(command -v brew)" ]; then
-        return
+        return 0
     fi
 
     if [ -z "$(command -v curl)" ]; then
@@ -15,9 +23,9 @@ macos::terminals::homebrew::install() {
     /bin/bash -c "$(curl -fsSL "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh")"
 }
 
-macos::terminals::homebrew::set_env() {
+terminal::homebrew::set_env() {
     if [ ! -d "/opt/homebrew" ]; then
-        return
+        return 0
     fi
 
     eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -32,13 +40,13 @@ eval "\$(/opt/homebrew/bin/brew shellenv)"
 EOF
 }
 
-macos::terminals::homebrew::upgrade() {
+terminal::homebrew::upgrade() {
     brew update
     brew upgrade
 }
 
-macos::terminals::homebrew() {
-    macos::terminals::homebrew::install
-    macos::terminals::homebrew::set_env
-    macos::terminals::homebrew::upgrade
+terminal::homebrew() {
+    terminal::homebrew::install
+    terminal::homebrew::set_env
+    terminal::homebrew::upgrade
 }

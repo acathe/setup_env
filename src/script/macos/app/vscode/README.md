@@ -22,7 +22,6 @@
 |    [One Dark Pro](https://marketplace.visualstudio.com/items?itemName=zhuangtongfa.Material-theme)     |
 |  [Ligatures Limited](https://marketplace.visualstudio.com/items?itemName=kshetline.ligatures-limited)  |
 |         [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens)         |
-| [Comment Highlighter](https://marketplace.visualstudio.com/items?itemName=willasm.comment-highlighter) |
 
 ## 2. Remote
 
