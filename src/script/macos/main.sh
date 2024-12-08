@@ -15,27 +15,27 @@ main() {
     fi
 
     if [[ -z "${DISABLE_HOMEBREW}" ]]; then
-        macos::terminals::homebrew
+        terminal::homebrew
     fi
 
     if [[ -z "${DISABLE_OMZ}" ]]; then
-        macos::terminals::omz
+        terminal::omz
     fi
 
     if [[ -n "${ENABLE_ORBSTACK}" ]]; then
-        macos::applications::install_orbstack
+        app::install_orbstack
     fi
 
     if [[ -n "${ENABLE_VSCODE}" ]]; then
-        macos::applications::install_vscode
+        app::install_vscode
     fi
 
     if [[ -n "${ENABLE_CHATGPT}" ]]; then
-        macos::applications::install_chatgpt
+        app::install_chatgpt
     fi
 
     if [[ -n "${ENABLE_UTM}" ]]; then
-        macos::applications::install_utm
+        app::install_utm
     fi
 
     return 0
