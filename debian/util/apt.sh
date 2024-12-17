@@ -2,15 +2,14 @@
 
 set -e
 
-if [[ -n "${_SETUP_ENV_DEBIAN_UTIL_APT_SH}" ]]; then
+if [[ -n "${_SETUP_ENV_LINUX_UTIL_APT_SH}" ]]; then
     return 0
 else
-    _SETUP_ENV_DEBIAN_UTIL_APT_SH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-    readonly _SETUP_ENV_DEBIAN_UTIL_APT_SH
-    cd "${_SETUP_ENV_DEBIAN_UTIL_APT_SH}"
+    _SETUP_ENV_LINUX_UTIL_APT_SH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    readonly _SETUP_ENV_LINUX_UTIL_APT_SH
 fi
 
-util::apt::install() {
+apt::install() {
     local _packages=("${@}")
 
     if (("${#_packages[@]}" == 0)); then
@@ -35,11 +34,11 @@ util::apt::install() {
     sudo apt-get install -y -qq "${_uninstalled[@]}"
 }
 
-util::apt::update() {
-    sudo apt-get update
+apt::update() {
+    sudo apt-get update -qq
 }
 
-util::apt::upgrade() {
+apt::upgrade() {
     local _packages=("${@}")
 
     if (("${#_packages[@]}" == 0)); then
@@ -64,7 +63,7 @@ util::apt::upgrade() {
     sudo apt-get upgrade -y -qq "${_installed[@]}"
 }
 
-util::apt::clean() {
+apt::clean() {
     sudo apt-get autoremove -y
     sudo apt-get clean
 }

@@ -2,17 +2,22 @@
 
 set -e
 
-if [[ -n "${_SETUP_ENV_DEBIAN_TERMINAL_ZSH_SH}" ]]; then
+if [[ -n "${_SETUP_ENV_LINUX_TERMINAL_ZSH_SH}" ]]; then
     return 0
 else
-    _SETUP_ENV_DEBIAN_TERMINAL_ZSH_SH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-    readonly _SETUP_ENV_DEBIAN_TERMINAL_ZSH_SH
-    cd "${_SETUP_ENV_DEBIAN_TERMINAL_ZSH_SH}"
+    _SETUP_ENV_LINUX_TERMINAL_ZSH_SH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    readonly _SETUP_ENV_LINUX_TERMINAL_ZSH_SH
 fi
 
-source "../util/apt.sh"
+# shellcheck source=../util/apt.sh
+source "${_SETUP_ENV_LINUX_TERMINAL_ZSH_SH}/../util/apt.sh"
 
-terminal::zsh::_sync_profile() {
+zsh::install() {
+    apt::update
+    apt::install "zsh"
+}
+
+zsh::_sync_profile() {
     local _pre="${1}" _cur="${2}"
 
     if [ ! -f "${_pre}" ]; then
@@ -41,13 +46,16 @@ EOF
     fi
 }
 
-terminal::zsh::sync_profile() {
-    util::apt::install "zsh"
-
-    terminal::zsh::_sync_profile "/etc/profile" "/etc/zsh/zprofile"
-    terminal::zsh::_sync_profile "${HOME}/.profile" "${HOME}/.zprofile"
+zsh::sync_profile() {
+    zsh::_sync_profile "/etc/profile" "/etc/zsh/zprofile"
+    zsh::_sync_profile "${HOME}/.profile" "${HOME}/.zprofile"
 }
 
-terminal::zsh() {
-    terminal::zsh::sync_profile
+main() {
+    zsh::install
+    zsh::sync_profile
 }
+
+if [[ "${0}" == "${BASH_SOURCE[0]}" ]]; then
+    main "$@"
+fi

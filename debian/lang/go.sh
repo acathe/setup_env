@@ -2,19 +2,20 @@
 
 set -e
 
-if [[ -n "${_SETUP_ENV_DEBIAN_LANG_GOLANG_SH}" ]]; then
+if [[ -n "${_SETUP_ENV_LINUX_LANG_GO_SH}" ]]; then
     return 0
 else
-    _SETUP_ENV_DEBIAN_LANG_GOLANG_SH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-    readonly _SETUP_ENV_DEBIAN_LANG_GOLANG_SH
-    cd "${_SETUP_ENV_DEBIAN_LANG_GOLANG_SH}"
+    _SETUP_ENV_LINUX_LANG_GO_SH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    readonly _SETUP_ENV_LINUX_LANG_GO_SH
 fi
 
-source "../util/apt.sh"
-source "../util/omz.sh"
+# shellcheck source=../util/apt.sh
+source "${_SETUP_ENV_LINUX_LANG_GO_SH}/../util/apt.sh"
+# shellcheck source=../terminal/omz.sh
+source "${_SETUP_ENV_LINUX_LANG_GO_SH}/../terminal/omz.sh"
 
-lang::golang::_get_package() {
-    util::apt::install "curl" "jq"
+go::_get_package() {
+    apt::install "curl" "jq"
 
     local _go_version
     _go_version="$(
@@ -40,19 +41,21 @@ lang::golang::_get_package() {
     echo "${_go_version}.${_os_type,,}-${_arch}.tar.gz"
 }
 
-lang::golang::install() {
-    util::apt::install "curl"
+go::install() {
+    apt::install "curl"
 
     local _go_pkg
-    _go_pkg="$(lang::golang::_get_package)"
+    _go_pkg="$(go::_get_package)"
 
-    curl --proto "=https" --tlsv1.2 -sSfOL "https://go.dev/dl/${_go_pkg}"
+    local _download_dir="/tmp/setup_env/download"
+    mkdir -p "${_download_dir}"
+
+    curl --proto "=https" --tlsv1.2 -sSfL "https://go.dev/dl/${_go_pkg}" -o "${_download_dir}/${_go_pkg}"
     sudo rm -rf "/usr/local/go"
-    sudo tar -C "/usr/local" -xzf "./${_go_pkg}"
-    rm "./${_go_pkg}"
+    sudo tar -C "/usr/local" -xzf "${_download_dir}/${_go_pkg}"
 }
 
-lang::golang::set_env() {
+go::set_env() {
     export PATH="/usr/local/go/bin:${PATH}"
 
     local _gopath="${HOME}/Projects/golang"
@@ -69,10 +72,14 @@ export PATH="/usr/local/go/bin:\$PATH"
 export PATH="\$(go env GOPATH)/bin:\$PATH"
 EOF
 
-    util::omz::append_plugin "golang"
+    omz::append_plugin "golang"
 }
 
-lang::golang() {
-    lang::golang::install
-    lang::golang::set_env
+main() {
+    go::install
+    go::set_env
 }
+
+if [[ "${0}" == "${BASH_SOURCE[0]}" ]]; then
+    main "$@"
+fi
