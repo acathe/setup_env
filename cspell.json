@@ -1,6 +1,8 @@
 {
     "words": [
         "clangd",
-        "lldb"
+        "lldb",
+        "ohmyzsh",
+        "powerlevel",
     ]
 }
