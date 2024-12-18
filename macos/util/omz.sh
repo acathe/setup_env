@@ -2,7 +2,15 @@
 
 set -e
 
-macos::utils::change_omz_plugins() {
+if [[ -n "${_SETUP_ENV_MACOS_UTIL_OMZ_SH}" ]]; then
+    return 0
+else
+    _SETUP_ENV_MACOS_UTIL_OMZ_SH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    readonly _SETUP_ENV_MACOS_UTIL_OMZ_SH
+    cd "${_SETUP_ENV_MACOS_UTIL_OMZ_SH}"
+fi
+
+util::omz::change_plugin() {
     local _plugins_name="${*}"
 
     if [ ! -f "${HOME}/.zshrc" ]; then
@@ -16,7 +24,7 @@ macos::utils::change_omz_plugins() {
     sed -i "" "s/^plugins=(.*)/plugins=(${_plugins_name})/" "${HOME}/.zshrc"
 }
 
-macos::utils::append_omz_plugins() {
+util::omz::append_plugin() {
     local _plugins_name="${*}"
 
     if [ ! -f "${HOME}/.zshrc" ]; then
@@ -30,8 +38,8 @@ macos::utils::append_omz_plugins() {
     sed -i "" "/^plugins=(/s/)/ ${_plugins_name})/" "${HOME}/.zshrc"
 }
 
-macos::utils::change_omz_theme() {
-    local _theme_name="${*}"
+util::omz::change_theme() {
+    local _theme_name="${1}"
 
     if [ ! -f "${HOME}/.zshrc" ]; then
         return 1
