@@ -8,16 +8,6 @@
     "editor.fontFamily": "Fira Code",
     "editor.fontLigatures": true,
     "editor.formatOnSave": true,
-    "editor.semanticTokenColorCustomizations": {
-        "rules": {
-            "method:rust": {
-                "bold": true
-            },
-            "parameter:rust": {
-                "italic": true
-            }
-        }
-    },
     "terminal.integrated.fontFamily": "MesloLGS NF",
     "workbench.colorTheme": "One Dark Pro",
     "workbench.iconTheme": "material-icon-theme",
@@ -36,7 +26,5 @@
         "workbench.action.tasks.configureTaskRunner",
         "workbench.action.tasks.runTask"
     ],
-    "cmake.showOptionsMovedNotification": false,
-    "redhat.telemetry.enabled": false,
-    "fileAccess.indicatorAction": "toggle"
+    "cmake.showOptionsMovedNotification": false
 }

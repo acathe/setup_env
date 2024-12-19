@@ -2,10 +2,17 @@
 
 set -e
 
-# shellcheck source-path=../..
-source "./macos/utils/utils.sh"
+if [[ -n "${_SETUP_ENV_MACOS_TERMINAL_OMZ_SH}" ]]; then
+    return 0
+else
+    _SETUP_ENV_MACOS_TERMINAL_OMZ_SH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    readonly _SETUP_ENV_MACOS_TERMINAL_OMZ_SH
+    cd "${_SETUP_ENV_MACOS_TERMINAL_OMZ_SH}"
+fi
 
-macos::terminals::omz::install() {
+source "../util/omz.sh"
+
+terminal::omz::install() {
     if [ -z "$(command -v curl)" ]; then
         return 1
     fi
@@ -23,28 +30,28 @@ macos::terminals::omz::install() {
     fi
 }
 
-macos::terminals::omz::install_plugins() {
-    macos::utils::change_omz_plugins "z" "brew" "vscode"
+terminal::omz::install_plugin() {
+    util::omz::change_plugin "z" "brew" "vscode"
 
     # Ref. https://github.com/Pilaton/OhMyZsh-full-autoupdate?tab=readme-ov-file#installing
     git clone "https://github.com/Pilaton/OhMyZsh-full-autoupdate.git" "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/ohmyzsh-full-autoupdate"
-    macos::utils::append_omz_plugins "ohmyzsh-full-autoupdate"
+    util::omz::append_plugin "ohmyzsh-full-autoupdate"
 
     # Ref. https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md#oh-my-zsh
     git clone "https://github.com/zsh-users/zsh-autosuggestions" "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
-    macos::utils::append_omz_plugins "zsh-autosuggestions"
+    util::omz::append_plugin "zsh-autosuggestions"
 
     # Ref. https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md/#Oh-my-zsh
     git clone "https://github.com/zsh-users/zsh-syntax-highlighting.git" "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
-    macos::utils::append_omz_plugins "zsh-syntax-highlighting"
+    util::omz::append_plugin "zsh-syntax-highlighting"
 
     # Ref. https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#oh-my-zsh
     git clone --depth=1 "https://github.com/romkatv/powerlevel10k.git" "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/themes/powerlevel10k"
-    macos::utils::change_omz_theme "powerlevel10k/powerlevel10k"
+    util::omz::change_theme "powerlevel10k/powerlevel10k"
     brew install --cask font-meslo-for-powerlevel10k
 }
 
-macos::terminals::omz() {
-    macos::terminals::omz::install
-    macos::terminals::omz::install_plugins
+terminal::omz() {
+    terminal::omz::install
+    terminal::omz::install_plugin
 }

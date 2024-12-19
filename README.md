@@ -94,4 +94,3 @@ The script will download the fonts required for the Powerlevel10k theme. You wil
 ## 4. TODO
 
 - [ ] Support retry on failure, not restart.
-- [ ] Support syncing VSCode settings.
