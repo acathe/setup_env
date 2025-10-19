@@ -28,9 +28,7 @@ if [ -z "$(command -v git)" ]; then
     sudo apt-get install -y git
 fi
 
-if [[ -z ${_BRANCH} ]]; then
-    _BRANCH="master"
-fi
+_BRANCH=${_BRANCH:-master}
 
 git clone --depth 1 --single-branch --branch "${_BRANCH}" "https://github.com/acathe/setup_env.git" "${tmpdir}"
 
