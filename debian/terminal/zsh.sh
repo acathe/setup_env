@@ -1,61 +1,45 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-if [[ -n "${_SETUP_ENV_LINUX_TERMINAL_ZSH_SH}" ]]; then
-    return 0
-else
-    _SETUP_ENV_LINUX_TERMINAL_ZSH_SH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-    readonly _SETUP_ENV_LINUX_TERMINAL_ZSH_SH
-fi
-
-# shellcheck source=../util/apt.sh
-source "${_SETUP_ENV_LINUX_TERMINAL_ZSH_SH}/../util/apt.sh"
-
-zsh::install() {
-    apt::update
-    apt::install "zsh"
+install_zsh() {
+    apt-get update
+    apt-get install -y zsh
 }
 
-zsh::_sync_profile() {
-    local _pre="${1}" _cur="${2}"
+sync_etc_profile() {
+    tmpfile="$(mktemp -u)"
 
-    if [ ! -f "${_pre}" ]; then
-        echo "No such file: ${_pre}, skip."
-        return 0
-    fi
+    tee "${tmpfile}" > "/dev/null" << EOF
+# Sync /etc/profile.
+emulate sh -c "source /etc/profile"
 
-    if [[ "${_pre}" =~ ^"${HOME}"/ ]]; then
-        _pre="${_pre/"${HOME}"/"\$HOME"}"
-    fi
-
-    tee "/tmp/.profile.sync" <<EOF >"/dev/null"
-# Sync ${_pre}.
-. ${_pre}
+$(cat "/etc/zsh/zprofile")
 EOF
 
-    if [ -s "${_cur}" ]; then
-        echo >>"/tmp/.profile.sync"
-        cat "${_cur}" >>"/tmp/.profile.sync"
-    fi
-
-    if [ -w "$(dirname -- "${_cur}")" ]; then
-        mv "/tmp/.profile.sync" "${_cur}"
-    else
-        sudo mv "/tmp/.profile.sync" "${_cur}"
-    fi
+    sudo mv "${tmpfile}" "/etc/zsh/zprofile"
 }
 
-zsh::sync_profile() {
-    zsh::_sync_profile "/etc/profile" "/etc/zsh/zprofile"
-    zsh::_sync_profile "${HOME}/.profile" "${HOME}/.zprofile"
+sync_home_profile() {
+    tee "${HOME}/.zprofile" > "/dev/null" << EOF
+# set PATH so it includes user's private bin if it exists
+if [ -d "\${HOME}/bin" ] ; then
+    PATH="\${HOME}/bin:\${PATH}"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "\${HOME}/.local/bin" ] ; then
+    PATH="\${HOME}/.local/bin:\${PATH}"
+fi
+EOF
 }
 
 main() {
-    zsh::install
-    zsh::sync_profile
+    install_zsh
+    sync_etc_profile
+    sync_home_profile
 }
 
-if [[ "${0}" == "${BASH_SOURCE[0]}" ]]; then
+if [[ $0 == "${BASH_SOURCE[0]}" ]]; then
     main "$@"
 fi
