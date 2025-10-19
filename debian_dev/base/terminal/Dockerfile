@@ -1,7 +1,4 @@
-ARG tag
-ARG pre_stage
-
-FROM dev_env:${tag}-${pre_stage}
+FROM dev_env:latest
 
 RUN sudo apt-get update && \
     sudo apt-get upgrade -y && \

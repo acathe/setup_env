@@ -1,6 +1,3 @@
-ARG tag
-ARG pre_stage
-
-FROM dev_env:${tag}-${pre_stage}
+FROM dev_env:latest
 
 CMD ["tail", "-f", "/dev/null"]
