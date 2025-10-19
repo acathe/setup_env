@@ -20,14 +20,9 @@ EOF
     sudo mv "${tmpfile}" "/etc/zsh/zprofile"
 }
 
-sync_home_profile() {
-    sed -i "/export PATH=\$HOME\/bin:\$HOME\/\.local\/bin:\/usr\/local\/bin:\$PATH/s/^# //" "${HOME}/.zshrc"
-}
-
 main() {
     install_zsh
     sync_etc_profile
-    sync_home_profile
 }
 
 if [[ $0 == "${BASH_SOURCE[0]}" ]]; then

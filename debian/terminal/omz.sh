@@ -56,6 +56,8 @@ remove_preshell() {
         return 0
     fi
 
+    sed -i "/export PATH=\$HOME\/bin:\$HOME\/\.local\/bin:\/usr\/local\/bin:\$PATH/s/^# //" "${HOME}/.zshrc"
+
     rm "${HOME}/.shell.pre-oh-my-zsh"
     rm "${HOME}/.profile"
     rm "${HOME}/.bashrc"
