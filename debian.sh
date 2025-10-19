@@ -21,14 +21,13 @@ if [ "$(id -u)" -eq 0 ]; then
     exit 0
 fi
 
-tmpdir="$(mktemp -du "/tmp/setup_env.XXXXXX")"
-
 if [ -z "$(command -v git)" ]; then
     sudo apt-get update
     sudo apt-get install -y git
 fi
 
 _BRANCH=${_BRANCH:-master}
+tmpdir="$(mktemp -du "/tmp/setup_env.XXXXXX")"
 
 git clone --depth 1 --single-branch --branch "${_BRANCH}" "https://github.com/acathe/setup_env.git" "${tmpdir}"
 
