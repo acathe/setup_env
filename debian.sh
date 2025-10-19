@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-if [ "$(id -u)" -ne 0 ]; then
+if [ "$(id -u)" -eq 0 ]; then
     if [[ -z ${SUDO_USER} ]]; then
         echo "SUDO_USER not set." >&2
         exit 1
