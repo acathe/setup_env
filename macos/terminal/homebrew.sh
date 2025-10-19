@@ -1,21 +1,15 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-if [[ -n "${_SETUP_ENV_MACOS_TERMINAL_HOMEBREW_SH}" ]]; then
-    return 0
-else
-    _SETUP_ENV_MACOS_TERMINAL_HOMEBREW_SH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-    readonly _SETUP_ENV_MACOS_TERMINAL_HOMEBREW_SH
-    cd "${_SETUP_ENV_MACOS_TERMINAL_HOMEBREW_SH}"
-fi
-
-terminal::homebrew::install() {
+install_homebrew() {
     if [ -n "$(command -v brew)" ]; then
+        echo "Homebrew is already installed."
         return 0
     fi
 
     if [ -z "$(command -v curl)" ]; then
+        echo "curl is not installed." >&2
         return 1
     fi
 
@@ -23,30 +17,29 @@ terminal::homebrew::install() {
     /bin/bash -c "$(curl -fsSL "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh")"
 }
 
-terminal::homebrew::set_env() {
+set_env() {
     if [ ! -d "/opt/homebrew" ]; then
-        return 0
+        echo "Homebrew is not installed." >&2
+        return 1
     fi
 
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
     if [ -s "${HOME}/.zprofile" ]; then
-        echo >>"${HOME}/.zprofile"
+        echo >> "${HOME}/.zprofile"
     fi
 
-    tee -a "${HOME}/.zprofile" <<EOF >"/dev/null"
+    tee -a "${HOME}/.zprofile" > "/dev/null" << EOF
 # Homebrew
 eval "\$(/opt/homebrew/bin/brew shellenv)"
 EOF
 }
 
-terminal::homebrew::upgrade() {
-    brew update
-    brew upgrade
+main() {
+    install_homebrew
+    set_env
 }
 
-terminal::homebrew() {
-    terminal::homebrew::install
-    terminal::homebrew::set_env
-    terminal::homebrew::upgrade
-}
+if [[ $0 == "${BASH_SOURCE[0]}" ]]; then
+    main "$@"
+fi
