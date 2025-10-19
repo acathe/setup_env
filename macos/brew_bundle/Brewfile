@@ -1,0 +1,4 @@
+cask "chatgpt"
+cask "font-fira-code"
+cask "font-meslo-for-powerlevel10k"
+cask "visual-studio-code"

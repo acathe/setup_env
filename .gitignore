@@ -21,8 +21,3 @@
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode
-
-!.vscode/tag-settings.json
-!.vscode/README.md
-
-*.tmp.sh
