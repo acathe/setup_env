@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ "$(id -u)" -ne 0 ]; then
+    if [[ -z ${SUDO_USER} ]]; then
+        echo "SUDO_USER not set" >&2
+        exit 1
+    fi
+
+    apt-get update
+    apt-get install -y sudo
+
+    echo "${SUDO_USER} ALL=(ALL) NOPASSWD:ALL" > "/etc/sudoers.d/99-${SUDO_USER}"
+    chmod 0440 "/etc/sudoers.d/99-${SUDO_USER}"
+
+    exit 0
+fi
+
+tmpdir="$(mktemp -du "/tmp/setup_env.XXXXXX")"
+
+if [ -z "$(command -v git)" ]; then
+    sudo apt-get update
+    sudo apt-get install -y git
+fi
+
+if [[ -z ${_BRANCH} ]]; then
+    _BRANCH="master"
+fi
+
+git clone --depth 1 --single-branch --branch "${_BRANCH}" "https://github.com/acathe/setup_env.git" "${tmpdir}"
+
+bash "${tmpdir}/debian/main.sh"
