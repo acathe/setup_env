@@ -4,13 +4,13 @@ set -euo pipefail
 
 install_omz() {
     if [ -z "$(command -v git)" ]; then
-        apt update
-        apt install -y git
+        sudo apt-get update
+        sudo apt-get install -y git
     fi
 
     if [ -z "$(command -v curl)" ]; then
-        apt update
-        apt install -y curl
+        sudo apt-get update
+        sudo apt-get install -y curl
     fi
 
     # Use `RUNZSH="no"` to skip running Zsh and prevent interrupting the script.

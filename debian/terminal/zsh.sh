@@ -3,8 +3,8 @@
 set -euo pipefail
 
 install_zsh() {
-    apt-get update
-    apt-get install -y zsh
+    sudo apt-get update
+    sudo apt-get install -y zsh
 }
 
 sync_etc_profile() {

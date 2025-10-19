@@ -4,15 +4,19 @@ set -euo pipefail
 
 if [ "$(id -u)" -ne 0 ]; then
     if [[ -z ${SUDO_USER} ]]; then
-        echo "SUDO_USER not set" >&2
+        echo "SUDO_USER not set." >&2
+        exit 1
+    fi
+
+    if ! getent group sudo > /dev/null 2>&1; then
+        echo "sudo group does not exist." >&2
         exit 1
     fi
 
     apt-get update
     apt-get install -y sudo
 
-    echo "${SUDO_USER} ALL=(ALL) NOPASSWD:ALL" > "/etc/sudoers.d/99-${SUDO_USER}"
-    chmod 0440 "/etc/sudoers.d/99-${SUDO_USER}"
+    usermod -aG sudo "${SUDO_USER}"
 
     exit 0
 fi

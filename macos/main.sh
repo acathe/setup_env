@@ -7,6 +7,7 @@ main() {
         xcode-select --install
     fi
 
+    cd "$(dirname "${BASH_SOURCE[0]}")"
     bash "./terminal/homebrew.sh"
     bash "./terminal/omz.sh"
 

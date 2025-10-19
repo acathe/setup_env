@@ -3,6 +3,7 @@
 set -euo pipefail
 
 main() {
+    cd "$(dirname "${BASH_SOURCE[0]}")"
     bash "./terminal/zsh.sh"
     bash "./terminal/omz.sh"
 }
