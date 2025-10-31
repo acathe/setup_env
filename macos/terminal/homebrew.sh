@@ -3,12 +3,12 @@
 set -euo pipefail
 
 install_homebrew() {
-    if [ -n "$(command -v brew)" ]; then
+    if [[ -n "$(command -v brew)" ]]; then
         echo "Homebrew is already installed."
         return 0
     fi
 
-    if [ -z "$(command -v curl)" ]; then
+    if [[ -z "$(command -v curl)" ]]; then
         echo "curl is not installed." >&2
         return 1
     fi
@@ -18,14 +18,14 @@ install_homebrew() {
 }
 
 set_env() {
-    if [ ! -d "/opt/homebrew" ]; then
+    if [[ ! -d "/opt/homebrew" ]]; then
         echo "Homebrew is not installed." >&2
         return 1
     fi
 
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
-    if [ -s "$HOME/.zprofile" ]; then
+    if [[ -s "$HOME/.zprofile" ]]; then
         echo >> "$HOME/.zprofile"
     fi
 
