@@ -25,11 +25,11 @@ set_env() {
 
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
-    if [ -s "${HOME}/.zprofile" ]; then
-        echo >> "${HOME}/.zprofile"
+    if [ -s "$HOME/.zprofile" ]; then
+        echo >> "$HOME/.zprofile"
     fi
 
-    tee -a "${HOME}/.zprofile" > "/dev/null" << EOF
+    tee -a "$HOME/.zprofile" > "/dev/null" << EOF
 # Homebrew
 eval "\$(/opt/homebrew/bin/brew shellenv)"
 EOF
@@ -41,5 +41,6 @@ main() {
 }
 
 if [[ $0 == "${BASH_SOURCE[0]}" ]]; then
+    cd "$(dirname "${BASH_SOURCE[0]}")"
     main "$@"
 fi
