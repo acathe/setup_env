@@ -2,16 +2,44 @@
 
 set -euo pipefail
 
-if [[ ! -d "/Library/Developer/CommandLineTools" ]]; then
-    xcode-select --install
-fi
-
 BRANCH="${BRANCH:-master}"
-tmpdir="$(mktemp -du "/tmp/setup_env.XXXXXX")"
 
-git clone "https://github.com/acathe/setup-env.git" "$tmpdir" \
-    --depth 1 \
-    --single-branch \
-    --branch "$BRANCH"
+parse_args() {
+    POSITIONAL=()
+    while (($# > 0)); do
+        case "$1" in
+            --branch)
+                numOfArgs=1 # number of switch arguments
+                if (($# < numOfArgs + 1)); then
+                    shift $#
+                else
+                    BRANCH="$2"
+                    shift $((numOfArgs + 1)) # shift 'numOfArgs + 1' to bypass switch and its value
+                fi
+                ;;
+            *) # unknown flag/switch
+                POSITIONAL+=("$1")
+                shift
+                ;;
+        esac
+    done
+}
 
-bash "$tmpdir/macos/main.sh"
+main() {
+    if [[ ! -d "/Library/Developer/CommandLineTools" ]]; then
+        xcode-select --install
+    fi
+
+    tmpdir="$(mktemp -du "/tmp/setup_env.XXXXXX")"
+
+    git clone "https://github.com/acathe/setup-env.git" "$tmpdir" \
+        --depth 1 \
+        --single-branch \
+        --branch "$BRANCH"
+
+    bash "$tmpdir/macos/main.sh" "$@"
+}
+
+parse_args "$@"
+set -- "${POSITIONAL[@]}" # restore positional params
+main "$@"

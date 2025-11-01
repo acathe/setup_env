@@ -8,10 +8,10 @@ main() {
     fi
 
     [[ -f "./terminal/homebrew.sh" ]] \
-        && bash "./terminal/homebrew.sh"
+        && bash "./terminal/homebrew.sh" "$@"
 
     [[ -f "./terminal/omz.sh" ]] \
-        && bash "./terminal/omz.sh"
+        && bash "./terminal/omz.sh" "$@"
 
     [[ -f "./brew_bundle/Brewfile" ]] \
         && brew bundle --file="./brew_bundle/Brewfile"
