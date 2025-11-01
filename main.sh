@@ -73,5 +73,5 @@ main() {
 }
 
 parse_args "$@"
-set -- "${POSITIONAL[@]}" # restore positional params
+set -- "${POSITIONAL[@]+"${POSITIONAL[@]}"}" # restore positional params
 main "$@"
