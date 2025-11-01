@@ -28,21 +28,13 @@ parse_args() {
 main() {
     local from="dev-container/terminal:latest"
 
-    if $TOOLS_PROTOBUF; then
-        docker build . \
-            -t dev-container/tools/protobuf \
-            -f ./protobuf/Dockerfile \
-            --build-arg "from=$from"
-
+    if $TOOLS_PROTOBUF && [[ -f "./protobuf/build.sh" ]]; then
+        bash ./protobuf/build.sh --from "$from" "$@"
         from="dev-container/tools/protobuf:latest"
     fi
 
-    if $TOOLS_THRIFT; then
-        docker build . \
-            -t dev-container/tools/thrift \
-            -f ./thrift/Dockerfile \
-            --build-arg "from=$from"
-
+    if $TOOLS_THRIFT && [[ -f "./thrift/build.sh" ]]; then
+        bash ./thrift/build.sh --from "$from" "$@"
         from="dev-container/tools/thrift:latest"
     fi
 

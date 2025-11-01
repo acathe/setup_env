@@ -2,43 +2,33 @@
 
 set -euo pipefail
 
-USER="${USER:-}"
-GIT_USER_NAME="${GIT_USER_NAME:-}"
-GIT_USER_EMAIL="${GIT_USER_EMAIL:-}"
+FROM="${FROM:-dev-container/terminal:latest}"
+PROTOC_VERSION="${PROTOC_VERSION:-$(curl -s 'https://api.github.com/repos/protocolbuffers/protobuf/releases/latest' | grep 'tag_name' | sed -E 's/.*"v([0-9.]+)".*/\1/')}"
 
 parse_args() {
     POSITIONAL=()
     while (($# > 0)); do
         case "$1" in
-            --user)
+            --from)
                 numOfArgs=1 # number of switch arguments
                 if (($# < numOfArgs + 1)); then
                     shift $#
                 else
-                    USER="$2"
+                    FROM="$2"
                     shift $((numOfArgs + 1)) # shift 'numOfArgs + 1' to bypass switch and its value
                 fi
                 ;;
-            --git-user-name)
+            --protoc-version)
                 numOfArgs=1 # number of switch arguments
                 if (($# < numOfArgs + 1)); then
                     shift $#
                 else
-                    GIT_USER_NAME="$2"
-                    shift $((numOfArgs + 1)) # shift 'numOfArgs + 1' to bypass switch and its value
-                fi
-                ;;
-            --git-user-email)
-                numOfArgs=1 # number of switch arguments
-                if (($# < numOfArgs + 1)); then
-                    shift $#
-                else
-                    GIT_USER_EMAIL="$2"
+                    PROTOC_VERSION="$2"
                     shift $((numOfArgs + 1)) # shift 'numOfArgs + 1' to bypass switch and its value
                 fi
                 ;;
             *) # unknown flag/switch
-                POSITIONAL+=("$1")
+                POSITIONAL+=("${1}")
                 shift
                 ;;
         esac
@@ -47,10 +37,9 @@ parse_args() {
 
 main() {
     docker build . \
-        -t dev-container/terminal \
-        --build-arg "user=$USER" \
-        --build-arg "git_user_name=$GIT_USER_NAME" \
-        --build-arg "git_user_email=$GIT_USER_EMAIL"
+        -t dev-container/dev/bash \
+        --build-arg "from=$FROM" \
+        --build-arg "protoc_version=$PROTOC_VERSION"
 }
 
 if [[ $0 == "${BASH_SOURCE[0]}" ]]; then

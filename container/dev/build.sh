@@ -38,39 +38,23 @@ parse_args() {
 main() {
     local from="dev-container/terminal:latest"
 
-    if $DEV_BASH; then
-        docker build . \
-            -t dev-container/dev/bash \
-            -f ./bash/Dockerfile \
-            --build-arg "from=$from"
-
+    if $DEV_BASH && [[ -f "./bash/build.sh" ]]; then
+        bash ./bash/build.sh --from "$from" "$@"
         from="dev-container/dev/bash:latest"
     fi
 
-    if $DEV_GO; then
-        docker build . \
-            -t dev-container/dev/go \
-            -f ./go/Dockerfile \
-            --build-arg "from=$from"
-
+    if $DEV_GO && [[ -f "./go/build.sh" ]]; then
+        bash ./go/build.sh --from "$from" "$@"
         from="dev-container/dev/go:latest"
     fi
 
-    if $DEV_PYTHON; then
-        docker build . \
-            -t dev-container/dev/python \
-            -f ./python/Dockerfile \
-            --build-arg "from=$from"
-
+    if $DEV_PYTHON && [[ -f "./python/build.sh" ]]; then
+        bash ./python/build.sh --from "$from" "$@"
         from="dev-container/dev/python:latest"
     fi
 
-    if $DEV_RUST; then
-        docker build . \
-            -t dev-container/dev/rust \
-            -f ./rust/Dockerfile \
-            --build-arg "from=$from"
-
+    if $DEV_RUST && [[ -f "./rust/build.sh" ]]; then
+        bash ./rust/build.sh --from "$from" "$@"
         from="dev-container/dev/rust:latest"
     fi
 
