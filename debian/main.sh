@@ -3,8 +3,6 @@
 set -euo pipefail
 
 main() {
-    [[ -f "./terminal/git.sh" ]] \
-        && bash "./terminal/git.sh" "$@"
     [[ -f "./terminal/zsh.sh" ]] \
         && bash "./terminal/zsh.sh" "$@"
     [[ -f "./terminal/omz.sh" ]] \
