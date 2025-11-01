@@ -33,7 +33,7 @@ main() {
         from="dev-container/tools/protobuf:latest"
     fi
 
-    if $TOOLS_THRIFT && [[ -f "./thrift/build.sh" ]]; then
+    if false && $TOOLS_THRIFT && [[ -f "./thrift/build.sh" ]]; then
         bash ./thrift/build.sh --from "$from" "$@"
         from="dev-container/tools/thrift:latest"
     fi
