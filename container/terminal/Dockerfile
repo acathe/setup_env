@@ -32,7 +32,9 @@ RUN sed -i "/export PATH=\$HOME\/bin:\$HOME\/\.local\/bin:\/usr\/local\/bin:\$PA
     && echo '' >> "$HOME/.zshrc" \
     && echo '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' >> "$HOME/.zshrc" \
     && echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> "$HOME/.zshrc" \
+    && sudo -n usermod -s "$(command -v zsh)" "$(whoami)" \
     && rm "$HOME/.profile" \
     && rm "$HOME/.bashrc" \
-    && rm "$HOME/.bash_logout" \
-    && sudo -n usermod -s "$(command -v zsh)" "$(whoami)"
+    && rm "$HOME/.bash_logout"
+
+SHELL ["/usr/bin/zsh", "-c"]

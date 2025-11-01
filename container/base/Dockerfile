@@ -7,7 +7,7 @@ ARG language
 ARG tz
 ARG term=xterm-256color
 
-SHELL ["/bin/bash", "-c"]
+SHELL ["/usr/bin/bash", "-c"]
 
 ENV LANG=${lang}.${encoding}
 ENV LANGUAGE=${language}
