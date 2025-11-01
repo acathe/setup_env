@@ -2,36 +2,45 @@
 
 set -euo pipefail
 
-if [[ "$(id -u)" == "0" ]]; then
-    if [[ -z $SUDO_USER ]]; then
-        echo "SUDO_USER not set." >&2
-        exit 1
-    fi
-
-    if ! getent group sudo > /dev/null 2>&1; then
-        echo "sudo group does not exist." >&2
-        exit 1
-    fi
-
-    apt-get update
-    apt-get install -y sudo
-
-    usermod -aG sudo "$SUDO_USER"
-
-    exit 0
-fi
-
-if [[ -z "$(command -v git)" ]]; then
-    sudo apt-get update
-    sudo apt-get install -y git
-fi
-
 BRANCH="${BRANCH:-master}"
-tmpdir="$(mktemp -du "/tmp/setup_env.XXXXXX")"
 
-git clone "https://github.com/acathe/setup-env.git" "$tmpdir" \
-    --depth 1 \
-    --single-branch \
-    --branch "$BRANCH"
+parse_args() {
+    POSITIONAL=()
+    while (($# > 0)); do
+        case "$1" in
+            --branch)
+                numOfArgs=1 # number of switch arguments
+                if (($# < numOfArgs + 1)); then
+                    shift $#
+                else
+                    BRANCH="$2"
+                    shift $((numOfArgs + 1)) # shift 'numOfArgs + 1' to bypass switch and its value
+                fi
+                ;;
+            *) # unknown flag/switch
+                POSITIONAL+=("$1")
+                shift
+                ;;
+        esac
+    done
+}
 
-bash "$tmpdir/debian/main.sh"
+main() {
+    if [[ -z "$(command -v git)" ]]; then
+        sudo apt-get update
+        sudo apt-get install -y git
+    fi
+
+    tmpdir="$(mktemp -du "/tmp/setup_env.XXXXXX")"
+
+    git clone "https://github.com/acathe/setup-env.git" "$tmpdir" \
+        --depth 1 \
+        --single-branch \
+        --branch "$BRANCH"
+
+    bash "$tmpdir/debian/main.sh" "$@"
+}
+
+parse_args "$@"
+set -- "${POSITIONAL[@]}" # restore positional params
+main "$@"

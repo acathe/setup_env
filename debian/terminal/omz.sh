@@ -32,7 +32,7 @@ install_plugin() {
         return 1
     fi
 
-    sed -i "/^plugins=(/s/)/ z sudo vscode)/" "$HOME/.zshrc"
+    sed -i '/^plugins=(/s/)/ z sudo vscode)/' "$HOME/.zshrc"
 
     # Ref. https://github.com/Pilaton/OhMyZsh-full-autoupdate?tab=readme-ov-file#installing
     git clone "https://github.com/Pilaton/OhMyZsh-full-autoupdate.git" "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/ohmyzsh-full-autoupdate"
@@ -48,7 +48,7 @@ install_plugin() {
 
     # Ref. https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#oh-my-zsh
     git clone --depth=1 "https://github.com/romkatv/powerlevel10k.git" "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
-    sed -i 's:^ZSH_THEME=".*":ZSH_THEME="powerlevel10k/powerlevel10k":' "$HOME/.zshrc"
+    sed -i 's|^ZSH_THEME=".*"|ZSH_THEME="powerlevel10k/powerlevel10k"|' "$HOME/.zshrc"
 }
 
 remove_preshell() {
@@ -56,12 +56,13 @@ remove_preshell() {
         return 0
     fi
 
+    rm "$HOME/.shell.pre-oh-my-zsh"
+
     sed -i "/export PATH=\$HOME\/bin:\$HOME\/\.local\/bin:\/usr\/local\/bin:\$PATH/s/^# //" "$HOME/.zshrc"
 
-    rm "$HOME/.shell.pre-oh-my-zsh"
-    rm "$HOME/.profile"
-    rm "$HOME/.bashrc"
-    rm "$HOME/.bash_logout"
+    [[ -f "$HOME/.profile" ]] && rm "$HOME/.profile"
+    [[ -f "$HOME/.bashrc" ]] && rm "$HOME/.bashrc"
+    [[ -f "$HOME/.bash_logout" ]] && rm "$HOME/.bash_logout"
 }
 
 main() {
