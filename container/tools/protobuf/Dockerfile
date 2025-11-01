@@ -9,5 +9,4 @@ RUN sudo apt-get update \
     && sudo rm -rf /var/lib/apt/lists/*
 
 RUN curl -fsSL "https://github.com/protocolbuffers/protobuf/releases/download/v${protoc_version}/protoc-${protoc_version}-linux-x86_64.zip" -o "/tmp/protoc-${protoc_version}-linux-x86_64.zip" \
-    && unzip "/tmp/protoc-${protoc_version}-linux-x86_64.zip" -d "$HOME/.local" \
-    && rm "/tmp/protoc-${protoc_version}-linux-x86_64.zip"
+    && unzip "/tmp/protoc-${protoc_version}-linux-x86_64.zip" -d "$HOME/.local"
