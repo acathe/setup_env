@@ -36,6 +36,9 @@ main() {
     [[ -f "./dev/build.sh" ]] \
         && bash "./dev/build.sh" "$@"
 
+    [[ -f "./tools/build.sh" ]] \
+        && bash "./tools/build.sh" "$@"
+
     docker build . \
         -t dev-container/main
 
