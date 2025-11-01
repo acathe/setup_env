@@ -32,7 +32,7 @@ install_plugin() {
         return 1
     fi
 
-    sed -i '/^plugins=(/s/)/ z sudo vscode)/' "$HOME/.zshrc"
+    sed -i 's/^plugins=(.*)/plugins=(z sudo vscode)/' "$HOME/.zshrc"
 
     # Ref. https://github.com/Pilaton/OhMyZsh-full-autoupdate?tab=readme-ov-file#installing
     git clone "https://github.com/Pilaton/OhMyZsh-full-autoupdate.git" "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/ohmyzsh-full-autoupdate"
