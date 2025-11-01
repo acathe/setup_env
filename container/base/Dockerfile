@@ -1,26 +1,28 @@
 FROM debian:trixie
 
 ARG user
-ARG lang=C.UTF-8
-ARG encoding=UTF-8
-ARG timezone=Etc/UTC
+ARG lang
+ARG encoding
+ARG language
+ARG tz
+ARG term=xterm-256color
+
+SHELL ["/bin/bash", "-c"]
+
+ENV LANG=${lang}.${encoding}
+ENV LANGUAGE=${language}
+ENV TZ=${tz}
+ENV TERM=${term}
 
 RUN apt-get update \
     && apt-get install -y locales \
     && rm -rf /var/lib/apt/lists/* \
-    && echo "${lang} ${encoding}" > /etc/locale.gen \
-    && locale-gen \
-    && update-locale LANG="${lang}"
-
-RUN apt-get update \
-    && apt-get install -y tzdata \
-    && rm -rf /var/lib/apt/lists/* \
-    && ln -sf "/usr/share/zoneinfo/${timezone}" /etc/localtime \
-    && dpkg-reconfigure -f noninteractive tzdata
+    && localedef -i ${lang} -c -f ${encoding} -A /usr/share/locale/locale.alias ${lang}.${encoding}
 
 RUN apt-get update \
     && apt-get install -y sudo \
     && rm -rf /var/lib/apt/lists/* \
+    && useradd -m -s "$(command -v bash)" "${user}" \
     && echo "${user} ALL=(ALL) NOPASSWD:ALL" > "/etc/sudoers.d/${user}" \
     && chmod 0440 "/etc/sudoers.d/${user}"
 
