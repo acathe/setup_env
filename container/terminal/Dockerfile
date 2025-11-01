@@ -3,9 +3,9 @@ FROM dev-container/base:latest
 ARG git_user_name
 ARG git_user_email
 
-RUN sudo apt-get update && \
-    sudo apt-get install -y zsh git curl && \
-    sudo rm -rf /var/lib/apt/lists/*
+RUN sudo apt-get update \
+    && sudo apt-get install -y zsh git curl \
+    && sudo rm -rf /var/lib/apt/lists/*
 
 RUN tmpfile="$(mktemp)" \
     && echo '# Sync /etc/profile' >> "$tmpfile" \
