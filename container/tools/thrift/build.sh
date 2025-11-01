@@ -37,7 +37,7 @@ parse_args() {
 
 main() {
     docker build . \
-        -t dev-container/dev/bash \
+        -t dev-container/tools/thrift \
         --build-arg "from=$FROM" \
         --build-arg "thrift_version=$THRIFT_VERSION"
 }
