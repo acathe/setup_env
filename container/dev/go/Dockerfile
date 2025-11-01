@@ -10,6 +10,6 @@ RUN export PATH="/usr/local/go/bin:$PATH" \
     && go env -w GOPATH="$HOME/Projects/golang" \
     && echo >> "$HOME/.zshrc" \
     && echo '# Golang' >> "$HOME/.zshrc" \
-    && echo 'export PATH="/usr/local/go/bin:$PATH"' >> "$HOME/.zshrc" \
+    && echo 'export PATH="$PATH:/usr/local/go/bin"' >> "$HOME/.zshrc" \
     && echo 'export PATH="$(go env GOPATH)/bin:$PATH"' >> "$HOME/.zshrc" \
     && sed -i '/^plugins=(/s/)/ golang)/' "$HOME/.zshrc"
