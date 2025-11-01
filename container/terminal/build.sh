@@ -36,10 +36,10 @@ parse_args() {
 }
 
 main() {
-    docker build -t dev-container/terminal \
+    docker build . \
+        -t dev-container/terminal \
         --build-arg "git_user_name=$GIT_USER_NAME" \
-        --build-arg "git_user_email=$GIT_USER_EMAIL" \
-        .
+        --build-arg "git_user_email=$GIT_USER_EMAIL"
 }
 
 if [[ $0 == "${BASH_SOURCE[0]}" ]]; then

@@ -66,13 +66,13 @@ parse_args() {
 }
 
 main() {
-    docker build -t dev-container/base \
+    docker build . \
+        -t dev-container/base \
         --build-arg "user=$USER" \
         --build-arg "lang=$LANG" \
         --build-arg "encoding=$ENCODING" \
         --build-arg "language=$LANGUAGE" \
-        --build-arg "tz=$TZ" \
-        .
+        --build-arg "tz=$TZ"
 }
 
 if [[ $0 == "${BASH_SOURCE[0]}" ]]; then
