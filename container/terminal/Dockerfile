@@ -10,7 +10,7 @@ RUN sudo apt-get update \
 RUN tmpfile="$(mktemp)" \
     && echo '# Sync /etc/profile' >> "$tmpfile" \
     && echo 'emulate sh -c "source /etc/profile"' >> "$tmpfile" \
-    && echo '' >> "$tmpfile" \
+    && echo >> "$tmpfile" \
     && cat "/etc/zsh/zprofile" >> "$tmpfile" \
     && sudo mv "$tmpfile" "/etc/zsh/zprofile"
 
@@ -18,7 +18,7 @@ RUN git config --global user.name "${git_user_name}" \
     && git config --global user.email "${git_user_email}" \
     && git config --global core.editor "code --wait"
 
-RUN sh -c "$(curl --proto "=https" --tlsv1.2 -fsSL "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh")" --unattended \
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended \
     && git clone "https://github.com/Pilaton/OhMyZsh-full-autoupdate.git" "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/ohmyzsh-full-autoupdate" \
     && git clone "https://github.com/zsh-users/zsh-autosuggestions" "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" \
     && git clone "https://github.com/zsh-users/zsh-syntax-highlighting.git" "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" \
@@ -29,7 +29,7 @@ COPY "./.p10k.zsh" "./.p10k.zsh"
 RUN sed -i "/export PATH=\$HOME\/bin:\$HOME\/\.local\/bin:\/usr\/local\/bin:\$PATH/s/^# //" "$HOME/.zshrc" \
     && sed -i 's|^ZSH_THEME=".*"|ZSH_THEME="powerlevel10k/powerlevel10k"|' "$HOME/.zshrc" \
     && sed -i '/^plugins=(/s/)/ gitignore z sudo vscode ohmyzsh-full-autoupdate zsh-autosuggestions zsh-syntax-highlighting)/' "$HOME/.zshrc" \
-    && echo '' >> "$HOME/.zshrc" \
+    && echo >> "$HOME/.zshrc" \
     && echo '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' >> "$HOME/.zshrc" \
     && echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> "$HOME/.zshrc" \
     && sudo -n usermod -s "$(command -v zsh)" "$(whoami)" \
