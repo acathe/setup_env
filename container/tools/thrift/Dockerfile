@@ -4,6 +4,6 @@ FROM ${from}
 
 ARG thrift_version
 
-RUN curl -fsSL "http://www.apache.org/dyn/closer.cgi?path=/thrift/${thrift_version}/thrift-${thrift_version}.tar.gz" -o ./thrift-${thrift_version}.tar.gz \
-    && tar -C "$HOME/.local/bin" -xzf "./thrift-${thrift_version}.tar.gz" \
-    && rm -rf "./thrift-${thrift_version}.tar.gz"
+RUN curl -fsSL "https://dlcdn.apache.org/thrift/${thrift_version}/thrift-${thrift_version}.tar.gz" -o "/tmp/thrift-${thrift_version}.tar.gz" \
+    && tar -C "$HOME/.local/bin" -xzf "/tmp/thrift-${thrift_version}.tar.gz" \
+    && rm -rf "/tmp/thrift-${thrift_version}.tar.gz"
