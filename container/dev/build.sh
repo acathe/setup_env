@@ -73,6 +73,10 @@ main() {
 
         from="dev-container/dev/rust:latest"
     fi
+
+    docker build . \
+        -t dev-container/dev \
+        --build-arg "from=$from"
 }
 
 if [[ $0 == "${BASH_SOURCE[0]}" ]]; then
