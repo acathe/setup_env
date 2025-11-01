@@ -3,7 +3,7 @@
 set -euo pipefail
 
 BRANCH="${BRANCH:-master}"
-SETUP="${SETUP:-debian}"
+SETUP="${SETUP:-container}"
 
 parse_args() {
     POSITIONAL=()
