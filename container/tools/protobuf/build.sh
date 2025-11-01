@@ -37,7 +37,7 @@ parse_args() {
 
 main() {
     docker build . \
-        -t dev-container/dev/bash \
+        -t dev-container/tools/protobuf \
         --build-arg "from=$FROM" \
         --build-arg "protoc_version=$PROTOC_VERSION"
 }
