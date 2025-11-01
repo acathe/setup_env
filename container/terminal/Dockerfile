@@ -28,7 +28,7 @@ COPY "./.p10k.zsh" "./.p10k.zsh"
 
 RUN sed -i "/export PATH=\$HOME\/bin:\$HOME\/\.local\/bin:\/usr\/local\/bin:\$PATH/s/^# //" "$HOME/.zshrc" \
     && sed -i 's|^ZSH_THEME=".*"|ZSH_THEME="powerlevel10k/powerlevel10k"|' "$HOME/.zshrc" \
-    && sed -i '/^plugins=(/s/)/ gitignore z sudo vscode ohmyzsh-full-autoupdate zsh-autosuggestions zsh-syntax-highlighting)/' "$HOME/.zshrc" \
+    && sed -i '/^plugins=(/s/)/ z sudo vscode ohmyzsh-full-autoupdate zsh-autosuggestions zsh-syntax-highlighting)/' "$HOME/.zshrc" \
     && echo >> "$HOME/.zshrc" \
     && echo '# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.' >> "$HOME/.zshrc" \
     && echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> "$HOME/.zshrc" \
