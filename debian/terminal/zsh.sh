@@ -10,14 +10,14 @@ install_zsh() {
 sync_etc_profile() {
     tmpfile="$(mktemp -u)"
 
-    tee "${tmpfile}" > "/dev/null" << EOF
+    tee "$tmpfile" > "/dev/null" << EOF
 # Sync /etc/profile.
 emulate sh -c "source /etc/profile"
 
 $(cat "/etc/zsh/zprofile")
 EOF
 
-    sudo mv "${tmpfile}" "/etc/zsh/zprofile"
+    sudo mv "$tmpfile" "/etc/zsh/zprofile"
 }
 
 main() {
@@ -26,5 +26,6 @@ main() {
 }
 
 if [[ $0 == "${BASH_SOURCE[0]}" ]]; then
+    cd "$(dirname "${BASH_SOURCE[0]}")"
     main "$@"
 fi

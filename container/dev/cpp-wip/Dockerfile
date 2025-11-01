@@ -1,0 +1,14 @@
+ARG from=dev-container/terminal:latest
+
+FROM ${from}
+
+RUN sudo apt-get update \
+    && sudo apt-get install -y cmake-format \
+    && sudo rm -rf /var/lib/apt/lists/*
+
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh \
+    && echo >> "$HOME/.zshrc" \
+    && echo '# uv shell completions' >> "$HOME/.zshrc" \
+    && echo 'eval "$(uv generate-shell-completion zsh)"' >> "$HOME/.zshrc" \
+    && echo 'eval "$(uvx --generate-shell-completion zsh)"' >> "$HOME/.zshrc" \
+    && sed -i '/^plugins=(/s/)/ python)/' "$HOME/.zshrc"

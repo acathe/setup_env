@@ -6,7 +6,8 @@ add_docker_repo() {
     sudo apt-get update
     sudo apt-get install -y ca-certificates curl
     sudo install -m 0755 -d /etc/apt/keyrings
-    sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+    sudo curl -fsSL "https://download.docker.com/linux/debian/gpg" \
+        -o /etc/apt/keyrings/docker.asc
     sudo chmod a+r /etc/apt/keyrings/docker.asc
 
     # Add the repository to Apt sources:
@@ -16,7 +17,12 @@ add_docker_repo() {
 
 install_docker() {
     sudo apt-get update
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    sudo apt-get install -y \
+        docker-ce \
+        docker-ce-cli \
+        containerd.io \
+        docker-buildx-plugin \
+        docker-compose-plugin
 }
 
 add_docker_group() {
@@ -35,5 +41,6 @@ main() {
 }
 
 if [[ $0 == "${BASH_SOURCE[0]}" ]]; then
+    cd "$(dirname "${BASH_SOURCE[0]}")"
     main "$@"
 fi

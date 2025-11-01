@@ -3,17 +3,21 @@
 set -euo pipefail
 
 main() {
-    if [ ! -d "/Library/Developer/CommandLineTools" ]; then
+    if [[ ! -d "/Library/Developer/CommandLineTools" ]]; then
         xcode-select --install
     fi
 
-    cd "$(dirname "${BASH_SOURCE[0]}")"
-    bash "./terminal/homebrew.sh"
-    bash "./terminal/omz.sh"
+    [[ -f "./terminal/homebrew.sh" ]] \
+        && bash "./terminal/homebrew.sh" "$@"
 
-    brew bundle --file="./brew_bundle/Brewfile"
+    [[ -f "./terminal/omz.sh" ]] \
+        && bash "./terminal/omz.sh" "$@"
+
+    [[ -f "./brew_bundle/Brewfile" ]] \
+        && brew bundle --file="./brew_bundle/Brewfile"
 }
 
 if [[ $0 == "${BASH_SOURCE[0]}" ]]; then
+    cd "$(dirname "${BASH_SOURCE[0]}")"
     main "$@"
 fi

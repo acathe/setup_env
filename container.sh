@@ -26,8 +26,9 @@ parse_args() {
 }
 
 main() {
-    if [[ ! -d "/Library/Developer/CommandLineTools" ]]; then
-        xcode-select --install
+    if [[ -z "$(command -v git)" ]]; then
+        sudo apt-get update
+        sudo apt-get install -y git
     fi
 
     tmpdir="$(mktemp -du "/tmp/setup_env.XXXXXX")"
@@ -37,7 +38,7 @@ main() {
         --single-branch \
         --branch "$BRANCH"
 
-    bash "$tmpdir/macos/main.sh" "$@"
+    bash "$tmpdir/container/main.sh" "$@"
 }
 
 parse_args "$@"
