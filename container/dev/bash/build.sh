@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-FROM="${FROM:-dev-container/terminal:latest}"
+FROM="${FROM:-"dev-container/terminal:latest"}"
 
 parse_args() {
     POSITIONAL=()

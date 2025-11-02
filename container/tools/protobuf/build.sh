@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-FROM="${FROM:-dev-container/terminal:latest}"
-PROTOC_VERSION="${PROTOC_VERSION:-$(curl -s 'https://api.github.com/repos/protocolbuffers/protobuf/releases/latest' | grep 'tag_name' | sed -E 's/.*"v([0-9.]+)".*/\1/')}"
+FROM="${FROM:-"dev-container/terminal:latest"}"
+PROTOC_VERSION="${PROTOC_VERSION:-"$(curl -s 'https://api.github.com/repos/protocolbuffers/protobuf/releases/latest' | grep 'tag_name' | sed -E 's/.*"v([0-9.]+)".*/\1/')"}"
 
 parse_args() {
     POSITIONAL=()

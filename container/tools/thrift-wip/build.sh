@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-FROM="${FROM:-dev-container/terminal:latest}"
-THRIFT_VERSION="${THRIFT_VERSION:-$(curl -s 'https://downloads.apache.org/thrift/' | grep -oP '(?<=href=")[0-9.]+(?=/")' | sort -V | tail -n1)}"
+FROM="${FROM:-"dev-container/terminal:latest"}"
+THRIFT_VERSION="${THRIFT_VERSION:-"$(curl -s 'https://downloads.apache.org/thrift/' | grep -oP '(?<=href=")[0-9.]+(?=/")' | sort -V | tail -n1)"}"
 
 parse_args() {
     POSITIONAL=()

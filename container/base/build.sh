@@ -6,7 +6,7 @@ USER="${USER:-}"
 ENCODING="${LANG#*.}"
 LANG="${LANG%.*}"
 LANGUAGE="${LANGUAGE:-}"
-TZ="${TZ:-$(timedatectl show -p Timezone --value)}"
+TZ="${TZ:-"$(timedatectl show -p Timezone --value)"}"
 
 parse_args() {
     POSITIONAL=()
