@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+FROM="${FROM:-"dev-container/terminal:latest"}"
 TOOLS_PROTOBUF="${TOOLS_PROTOBUF:-false}"
 TOOLS_THRIFT="${TOOLS_THRIFT:-false}"
 
@@ -9,6 +10,15 @@ parse_args() {
     POSITIONAL=()
     while (($# > 0)); do
         case "$1" in
+            --from)
+                numOfArgs=1 # number of switch arguments
+                if (($# < numOfArgs + 1)); then
+                    shift $#
+                else
+                    FROM="$2"
+                    shift $((numOfArgs + 1)) # shift 'numOfArgs + 1' to bypass switch and its value
+                fi
+                ;;
             --tools-protobuf)
                 TOOLS_PROTOBUF=true
                 shift # shift once since flags have no values
@@ -26,21 +36,19 @@ parse_args() {
 }
 
 main() {
-    local from="dev-container/terminal:latest"
-
     if $TOOLS_PROTOBUF && [[ -f "./protobuf/build.sh" ]]; then
-        bash ./protobuf/build.sh --from "$from" "$@"
-        from="dev-container/tools/protobuf:latest"
+        bash ./protobuf/build.sh --from "$FROM" "$@"
+        FROM="dev-container/tools/protobuf:latest"
     fi
 
     if false && $TOOLS_THRIFT && [[ -f "./thrift/build.sh" ]]; then
-        bash ./thrift/build.sh --from "$from" "$@"
-        from="dev-container/tools/thrift:latest"
+        bash ./thrift/build.sh --from "$FROM" "$@"
+        FROM="dev-container/tools/thrift:latest"
     fi
 
     docker build . \
         -t dev-container/tools \
-        --build-arg "from=$from"
+        --build-arg "from=$FROM"
 }
 
 if [[ $0 == "${BASH_SOURCE[0]}" ]]; then
