@@ -46,7 +46,7 @@ main() {
 
     docker build . \
         -t dev-container/main \
-        --build-arg FROM="dev-container/tools:latest"
+        --build-arg "from=dev-container/tools:latest"
 
     [[ ! -d "$HOME/Projects" ]] && mkdir -p "$HOME/Projects"
 
