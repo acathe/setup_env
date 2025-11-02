@@ -14,7 +14,6 @@ parse_args() {
                     shift $#
                 else
                     USER="$2"
-                    POSITIONAL+=("$1" "$2")
                     shift $((numOfArgs + 1)) # shift 'numOfArgs + 1' to bypass switch and its value
                 fi
                 ;;
@@ -28,19 +27,26 @@ parse_args() {
 
 main() {
     [[ -f "./base/build.sh" ]] \
-        && bash "./base/build.sh" "$@"
+        && bash "./base/build.sh" --user "$USER" "$@"
 
     [[ -f "./terminal/build.sh" ]] \
-        && bash "./terminal/build.sh" "$@"
+        && bash "./terminal/build.sh" --user "$USER" "$@"
 
     [[ -f "./dev/build.sh" ]] \
-        && bash "./dev/build.sh" "$@"
+        && bash "./dev/build.sh" \
+            --user "$USER" \
+            --from "dev-container/terminal:latest" \
+            "$@"
 
     [[ -f "./tools/build.sh" ]] \
-        && bash "./tools/build.sh" "$@"
+        && bash "./tools/build.sh" \
+            --user "$USER" \
+            --from "dev-container/dev:latest" \
+            "$@"
 
     docker build . \
-        -t dev-container/main
+        -t dev-container/main \
+        --build-arg FROM="dev-container/tools:latest"
 
     [[ ! -d "$HOME/Projects" ]] && mkdir -p "$HOME/Projects"
 
